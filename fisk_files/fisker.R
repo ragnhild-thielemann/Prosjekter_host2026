@@ -3,8 +3,9 @@ library(workflows)
 library(tidymodels)
 library(tidyverse)
 library(tidytuesdayR)
+library(xgboost)
 
-set.seed(67)
+set.seed(670)
 data_fish <- tidytuesdayR::tt_load(2026, week = 11)
 
 losses <- ( data_fish$monthly_losses_data)
@@ -24,11 +25,11 @@ kontroll_fisk <- testing(mortality_delt)
 #setter opp en recipe, for å lage responsvariablene vi trener settet på
 
 rec_fisk <- trening_fisk |> #vi oppretter recipen på treningsettet
-  recipe(median ~ .)
+  recipe(median ~ .) |>
+  step_dummy(all_nominal_predictors())
 
 wf <- workflow() |> #Det er samme grunn-workflow for alle modellene
-  add_recipe(rec_fisk) |>
-  step_dummy(all_nominal_predictors())
+  add_recipe(rec_fisk) 
 
 #Setter nå opp ulike regresjonsmodeller å trene maskinen på datasettet vårt
 
@@ -53,21 +54,40 @@ wf_rf <- wf |>
   fit(trening_fisk)
 
 wf_xg <- wf |>
-  add_model(rf_model) |>
+  add_model(xg_model) |>
   fit(trening_fisk) 
-View(trening_fisk)
+
+lasso_model <- linear_reg(mode = "regression",
+                          engine = "glmnet", 
+                          penalty = 1,
+                          mixture = 0.5)
+
+wf_lasso <- wf |>
+  add_model(lasso_model)|>
+  fit(trening_fisk)
+
+unique(trening_fisk$region)
+unique(kontroll_fisk$region)
 oppsumerende <- kontroll_fisk |>
-  mutate(p_lm =predict(wf_lm, kontroll_fisk)$.pred)|> #legger ved de predikerte verdiene som kolonner
-  mutate(p_rf = predict(wf_rf, kontroll_fisk)$.pred) |>
-  mutate(p_xg = predict(wf_rf, kontroll_fisk)$.pred)|> 
-  select(median, p_xg,p_lm,p_rf)|>
-  pivot_longer(cols = -median, 
-               names_prefix = "p_",
-               names_to = "model",
-               values_to = "predict")|>
-  mutate(error = (predict-median)**2)|> #kvadrerte reusidaler
-  summarise(MSE = sum(error), .by = model)
+  mutate(
+    p_lm = predict(wf_lm, kontroll_fisk)$.pred,
+    p_rf = predict(wf_rf, kontroll_fisk)$.pred,
+    p_xg = predict(wf_xg, kontroll_fisk)$.pred,
+    p_lasso = predict(wf_lasso, kontroll_fisk)$.pred
+  ) |>
+  select(median, p_lm, p_rf, p_xg, p_lasso) |>
+  pivot_longer(
+    cols = -median,
+    names_prefix = "p_",
+    names_to = "model",
+    values_to = "predict"
+  ) |>
+  mutate(error = (predict - median)^2) |>
+  summarise(
+    MSE = mean(error),
+    .by = model
+  )
+
 
 oppsumerende
-
 

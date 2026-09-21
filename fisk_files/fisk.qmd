@@ -10,13 +10,15 @@ Denne uken skal vi annalysere hvordan det går på oppdrettanleggene i Norge. De
 library(tidyverse)
 library(tidytuesdayR)
 library(workflows)
+library(xgboost)
 library(tidymodels)
 set.seed(670)
 data_fish <- tidytuesdayR::tt_load(2026, week = 11)
 
+mortality_raw <- data_fish$monthly_mortality_data
 losses <- ( data_fish$monthly_losses_data)
 
-mortality <- data_fish$monthly_mortality_data
+mortality <- (data_fish$monthly_mortality_data)
 
 ```
 
@@ -52,7 +54,8 @@ Nå ønsker vi å trene masksinen vår til å predikere median dødlighet for en
 
 
 mortality <- data_fish$monthly_mortality_data |>
-  mutate(date =  as.factor(month(as.Date(date)))) |> #gjør måned observasjonen har skjedd i til en forklaringsvaribel
+  mutate(date =  as.factor(month(as.Date(date)))) |>
+  mutate(species = as.factor(species))|>#gjør måned observasjonen har skjedd i til en forklaringsvaribel
   select(species,date,median) #sorter bare med de relevante kolonnene vidre
     
 #Deler datasettet i to, der vi har en del for trening, og en del for å teste modellene våre
@@ -67,8 +70,7 @@ rec_fisk <- trening_fisk |> #vi oppretter recipen på treningsettet
   recipe(median ~ .)
 
 wf <- workflow() |> #Det er samme grunn-workflow for alle modellene
-  add_recipe(rec_fisk) |>
-  step_dummy(all_nominal_predictors())
+  add_recipe(rec_fisk) 
 
 #Setter nå opp ulike regresjonsmodeller å trene maskinen på datasettet vårt
 
@@ -93,34 +95,62 @@ wf_rf <- wf |>
   fit(trening_fisk)
 
 wf_xg <- wf |>
-  add_model(rf_model) |>
+  add_model(xg_model) |>
   fit(trening_fisk) 
-View(trening_fisk)
+View(wf_xg)
+
 oppsumerende <- kontroll_fisk |>
-  mutate(p_lm =predict(wf_lm, kontroll_fisk)$.pred)|> #legger ved de predikerte verdiene som kolonner
+  mutate(p_lm =predict(wf_lm, kontroll_fisk)$.pred)|> 
   mutate(p_rf = predict(wf_rf, kontroll_fisk)$.pred) |>
-  mutate(p_xg = predict(wf_rf, kontroll_fisk)$.pred)|> 
+  mutate(p_xg = predict(wf_xg, kontroll_fisk)$.pred)|> 
   select(median, p_xg,p_lm,p_rf)|>
   pivot_longer(cols = -median, 
                names_prefix = "p_",
                names_to = "model",
                values_to = "predict")|>
   mutate(error = (predict-median)**2)|> #kvadrerte reusidaler
-  summarise(MSE = sum(error), .by = model)
+  summarise(MSE = mean(error), .by = model)
 
 oppsumerende
 
 
 ```
 
-Vi ser at den linjære modellen har en høyere reusidal-kvadratsum enn xg-boost og random forest. Grunnen til dette er at det er et komplekst
+Vi ser at den linjære modellen har en høyere reusidal-kvadratsum enn xg-boost og random forest.  Grunnen til dette er at det er et komplekst datasett, 
 
-Av MSE for de ulike metodene for maskinlæring ser vi at MSE for XGboost og Random forest er lavere enn for linjær regresjon. Dette er fordi vi har et komplekst datasett med en ikke-linjær sammenheng mellom forklaringsvariablene, slik at vi trenger en mer fleskibel modell. Datasettet vi trener modellen på inneholder 1400 rader (n = 1400), samt få prediksjonsfaktorer (p =3). Dette hindrer overestimering, som er en risiko ved random forest.
+Av MSE for de ulike metodene for maskinlæring ser vi at MSE for XGboost og Random forest er lavere enn for linjær regresjon. Dette er fordi vi har et komplekst datasett med en ikke-linjær sammenheng mellom forklaringsvariablene, slik at vi trenger en mer fleskibel modell. Datasettet vi trener modellen på inneholder 1400 rader (n = 1400), samt få prediksjonsfaktorer (p =3). Dette gjør datasettet mindre utsatt for overtilpassing, som er en risiko ved mer fleksible regresjonsmodeller. 
 
-Vi ser også at XGboost og random forest har like stor presisjon, som forteller oss at det ikke har noen ekstra effekt å opprette nye trær for å minske reusidalene fra de forrgje trærne, mot å opprette alle trærne paralelt. Random forest er en model som er vanskelig å forstå, da den ikke gir oss informasjon på hva som vektes positivt og negativt.
+Vi ser også at XGboost og random forest har like stor presisjon, som forteller oss at det ikke har noen ekstra effekt å bygge trærne sekvensielt, basert på reusidalene fra de forrgje trærne, mot å opprette alle trærne paralelt. 
+
+XGBoost og Random Forest har lavere MSE på testsettet enn den lineære modellen. Dette kan tyde på at de trebaserte modellene fanger opp sammenhenger i dataene som den lineære modellen ikke fanger opp like godt.
+
 
 ```{r}
-
+wf_lm
 
 ```
 
+Det vi ser, er at dersom det er en laks, så øker median dødlighet. I tilegg ser vi at median dødlighet er høyere om sommeren enn om vinteren.
+
+
+## Tidsseriedata for når fisken dør
+
+Vi ønsker å vite om vi har blitt bedre på å ta vare på fisken vår, altså om dødligheten i merene har gått ned. Vi plotter derfor de ulike kvantilene (om vi har redusert )
+
+```{r}
+
+tidsserie <- mortality_raw |>
+  select(date,median,q3,q1)|>
+  drop_na() |>
+  
+  pivot_longer(cols = -date, 
+               names_to = "Kvantil",
+               values_to = "Verdi") |>
+  mutate(Kvantil = as.factor(case_when(Kvantil == "median" ~ 0.5,
+                             Kvantil == "q1" ~ 0.25,
+                             Kvantil == "q3" ~ 0.75))) |>
+  ggplot(aes(x = date, y = Verdi, color = Kvantil)) + 
+  geom_smooth() 
+
+tidsserie
+```
