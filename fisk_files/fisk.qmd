@@ -130,7 +130,7 @@ wf_lm
 
 ```
 
-Det vi ser, er at dersom det er en laks, så øker median dødlighet. I tilegg ser vi at median dødlighet er høyere om sommeren enn om vinteren.
+Det vi ser, er at dersom det er en laks, så øker median dødlighet. I tilegg ser vi at median dødlighet er lavere om sommeren enn om vinteren.
 
 
 ## Tidsseriedata for når fisken dør
@@ -154,3 +154,34 @@ tidsserie <- mortality_raw |>
 
 tidsserie
 ```
+Vi ser av plottet at median og nedre kvantil for median dødlighet har ligget stabilt siden vi begynte å måle, mens vi har hatt en reduksjon i øvre kvantil.  Under maskinlæringen så vi en sammenheng mellom median dødlighet og hvilken måned det var på året. Derfor er det intressant å se om dette er en sekvensiell sammenheng mellom disse. 
+
+
+```{r}
+
+periodisk <- mortality_raw |>
+  select(date,median,q3,q1)|>
+  drop_na() |>
+  mutate(date = (month(date)))|>
+  
+  
+  summarise(Verdi_25 = mean(q1), Verdi_50 = mean(median), Verdi_75 = mean(q3),.by = date) |>
+  pivot_longer(cols = -date, 
+               names_prefix = "Verdi_",
+               
+               names_to = "Kvantil",
+               values_to = "V") |>
+  mutate(Kvantil = as.factor(case_when(Kvantil == "50" ~ 0.5,
+                             Kvantil == "25" ~ 0.25,
+                             Kvantil == "75" ~ 0.75))) |>
+  ggplot(aes(x = date, y = V, color = Kvantil)) + 
+  geom_line() + 
+  scale_x_continuous(breaks =  c(1,3,5,7,9,11) ,label =c(1,3,5,7,9,11)) + 
+  labs(x = "maned (1 er januar, 12 er desember)", y = "dødlighet", title = "Periodisk variasjon av dodligheten")
+
+
+periodisk
+
+```
+
+Vi ser av plottet at det stemmer med slik maskinlæringen er, at det er en periodisk lavere dødlighet om sommeren. skibedy out 
