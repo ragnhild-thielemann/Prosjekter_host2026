@@ -1,0 +1,16 @@
+---
+title: "co2"
+format: docx
+---
+
+
+
+```{r}
+library(tidyverse)
+library(readxl)
+
+
+co2 <- read_xlsx("co2.xlsx")
+View(co2)
+
+```

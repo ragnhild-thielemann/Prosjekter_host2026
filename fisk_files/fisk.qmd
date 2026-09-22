@@ -12,6 +12,7 @@ library(tidytuesdayR)
 library(workflows)
 library(xgboost)
 library(tidymodels)
+
 set.seed(670)
 data_fish <- tidytuesdayR::tt_load(2026, week = 11)
 

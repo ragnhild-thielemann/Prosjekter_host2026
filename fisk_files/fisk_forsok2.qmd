@@ -1,4 +1,9 @@
 ---
+title: "fisk_forsok2"
+format: docx
+---
+
+---
 title: "Fisk i merer"
 format: docx
 ---
@@ -12,6 +17,7 @@ library(tidytuesdayR)
 library(workflows)
 library(xgboost)
 library(tidymodels)
+
 set.seed(670)
 data_fish <- tidytuesdayR::tt_load(2026, week = 11)
 
@@ -67,7 +73,8 @@ kontroll_fisk <- testing(mortality_delt)
 #setter opp en recipe, for å lage responsvariablene vi trener settet på
 
 rec_fisk <- trening_fisk |> #vi oppretter recipen på treningsettet
-  recipe(median ~ .)
+  recipe(median ~ .)|>
+  step_dummy(all_nominal_predictors())
 
 wf <- workflow() |> #Det er samme grunn-workflow for alle modellene
   add_recipe(rec_fisk) 
@@ -97,7 +104,7 @@ wf_rf <- wf |>
 wf_xg <- wf |>
   add_model(xg_model) |>
   fit(trening_fisk) 
-View(wf_xg)
+
 
 oppsumerende <- kontroll_fisk |>
   mutate(p_lm =predict(wf_lm, kontroll_fisk)$.pred)|> 
@@ -120,7 +127,7 @@ Vi ser at den linjære modellen har en høyere reusidal-kvadratsum enn xg-boost 
 
 Av MSE for de ulike metodene for maskinlæring ser vi at MSE for XGboost og Random forest er lavere enn for linjær regresjon. Dette er fordi vi har et komplekst datasett med en ikke-linjær sammenheng mellom forklaringsvariablene, slik at vi trenger en mer fleskibel modell. Datasettet vi trener modellen på inneholder 1400 rader (n = 1400), samt få prediksjonsfaktorer (p =3). Dette gjør datasettet mindre utsatt for overtilpassing, som er en risiko ved mer fleksible regresjonsmodeller. 
 
-Vi ser også at XGboost og random forest har like stor presisjon, som forteller oss at det ikke har noen ekstra effekt å bygge trærne sekvensielt, basert på reusidalene fra de forrgje trærne, mot å opprette alle trærne paralelt. 
+Vi ser også at XGboost har noe lavere MSE enn random forest, som forteller oss at det minsker den reusidale kvadratsommen å å bygge trærne sekvensielt, basert på reusidalene fra de forrgje trærne, mot å opprette alle trærne parallelt. 
 
 XGBoost og Random Forest har lavere MSE på testsettet enn den lineære modellen. Dette kan tyde på at de trebaserte modellene fanger opp sammenhenger i dataene som den lineære modellen ikke fanger opp like godt.
 
