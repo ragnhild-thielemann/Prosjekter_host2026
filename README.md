@@ -4,4 +4,6 @@ Jeg har valgt å legge prosjektarbeidet mitt i Word-filer, slik at det blir enkl
 
 
 [Analyse av dødligheten til fisk i merer](https://github.com/ragnhild-thielemann/Prosjekter_host2026/blob/main/Prosjekter/fisk_files/fisk_forsok2.docx)
+
+
 [Utvikling av kronekurs](https://github.com/ragnhild-thielemann/Prosjekter_host2026/blob/main/Prosjekter/Valuttakurs/Valutakurs_eksamen2023.docx)
