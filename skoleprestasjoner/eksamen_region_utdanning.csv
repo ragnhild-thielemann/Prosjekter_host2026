@@ -1,0 +1,344 @@
+"07496: Standpunktkarakterer, etter fag, kjønn, foreldrenes utdanningsnivå, år og region"
+"fag";"kjønn";"foreldrenes utdanningsnivå";"Gjennomsnittlig standpunktkarakter 2026 31 Østfold";"Gjennomsnittlig standpunktkarakter 2026 32 Akershus";"Gjennomsnittlig standpunktkarakter 2026 03 Oslo - Oslove";"Gjennomsnittlig standpunktkarakter 2026 34 Innlandet";"Gjennomsnittlig standpunktkarakter 2026 33 Buskerud";"Gjennomsnittlig standpunktkarakter 2026 39 Vestfold";"Gjennomsnittlig standpunktkarakter 2026 40 Telemark";"Gjennomsnittlig standpunktkarakter 2026 42 Agder";"Gjennomsnittlig standpunktkarakter 2026 11 Rogaland";"Gjennomsnittlig standpunktkarakter 2026 46 Vestland";"Gjennomsnittlig standpunktkarakter 2026 15 Møre og Romsdal";"Gjennomsnittlig standpunktkarakter 2026 50 Trøndelag - Trööndelage";"Gjennomsnittlig standpunktkarakter 2026 18 Nordland - Nordlánnda"
+"Engelsk";"Begge kjønn";"Alle utdanningsnivå";4.2;4.4;4.5;4.1;4.2;4.1;4.1;4.2;4.3;4.3;4.2;4.2;4.2
+"Engelsk";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.8;3.7;3.8;3.6;3.8;3.5;3.4;3.4;3.6;3.5;3.6;3.3;3.6
+"Engelsk";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.9;4.0;4.0;3.8;4.0;3.8;3.8;3.9;4.0;4.0;4.0;3.8;4.0
+"Engelsk";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.4;4.4;4.5;4.3;4.3;4.2;4.2;4.3;4.4;4.3;4.2;4.3;4.3
+"Engelsk";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.7;4.8;4.6;4.6;4.5;4.5;4.5;4.7;4.7;4.5;4.6;4.7
+"Engelsk";"Begge kjønn";"Uoppgitt";3.6;3.7;3.6;3.6;3.7;3.4;3.1;3.7;3.8;3.6;3.8;3.1;3.4
+"Engelsk";"Jenter";"Alle utdanningsnivå";4.4;4.6;4.7;4.3;4.4;4.2;4.3;4.3;4.5;4.5;4.4;4.4;4.4
+"Engelsk";"Jenter";"Grunnskole eller ingen fullført utdanning";4.0;3.9;4.0;4.0;4.0;3.6;3.6;3.7;3.9;3.7;3.8;3.5;3.7
+"Engelsk";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.1;4.2;4.3;4.0;4.2;4.0;4.0;4.1;4.2;4.2;4.2;4.0;4.2
+"Engelsk";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.6;4.6;4.7;4.4;4.5;4.4;4.5;4.5;4.6;4.5;4.5;4.4;4.5
+"Engelsk";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.9;4.9;5.0;4.7;4.7;4.6;4.8;4.7;4.9;4.8;4.7;4.8;4.9
+"Engelsk";"Jenter";"Uoppgitt";4.1;3.9;3.9;3.9;3.5;3.6;..;3.7;4.0;4.1;4.0;3.2;3.5
+"Engelsk";"Gutter";"Alle utdanningsnivå";4.0;4.2;4.3;3.9;4.1;4.0;3.9;4.0;4.1;4.1;4.0;4.0;4.0
+"Engelsk";"Gutter";"Grunnskole eller ingen fullført utdanning";3.5;3.5;3.6;3.1;3.5;3.3;3.3;3.2;3.3;3.3;3.4;3.2;3.4
+"Engelsk";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.8;3.8;3.8;3.6;3.8;3.7;3.6;3.7;3.8;3.8;3.7;3.6;3.8
+"Engelsk";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.2;4.3;4.2;4.1;4.1;4.0;4.1;4.1;4.1;4.2;4.0;4.1;4.2
+"Engelsk";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.5;4.6;4.7;4.4;4.5;4.4;4.3;4.4;4.5;4.5;4.4;4.4;4.4
+"Engelsk";"Gutter";"Uoppgitt";3.1;3.6;3.3;3.3;3.9;3.1;..;..;3.6;3.2;3.7;3.0;3.3
+"Engelsk, skriftlig";"Begge kjønn";"Alle utdanningsnivå";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Begge kjønn";"Uoppgitt";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Jenter";"Alle utdanningsnivå";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Jenter";"Grunnskole eller ingen fullført utdanning";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Jenter";"Uoppgitt";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Gutter";"Alle utdanningsnivå";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Gutter";"Grunnskole eller ingen fullført utdanning";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, skriftlig";"Gutter";"Uoppgitt";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Begge kjønn";"Alle utdanningsnivå";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Begge kjønn";"Uoppgitt";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Jenter";"Alle utdanningsnivå";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Jenter";"Grunnskole eller ingen fullført utdanning";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Jenter";"Uoppgitt";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Gutter";"Alle utdanningsnivå";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Gutter";"Grunnskole eller ingen fullført utdanning";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Engelsk, muntlig";"Gutter";"Uoppgitt";0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0
+"Fordypning i engelsk";"Begge kjønn";"Alle utdanningsnivå";4.0;4.2;4.2;4.2;4.2;4.0;3.9;4.2;4.1;4.2;4.2;4.0;4.5
+"Fordypning i engelsk";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.8;3.8;3.9;4.1;3.9;3.8;3.8;3.7;3.6;3.6;4.0;3.3;4.4
+"Fordypning i engelsk";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.9;4.0;4.1;4.1;4.2;4.0;3.7;4.2;4.0;4.1;4.2;3.9;4.3
+"Fordypning i engelsk";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.2;4.4;4.5;4.2;4.3;4.1;4.1;4.2;4.3;4.4;4.3;4.2;4.7
+"Fordypning i engelsk";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.5;4.4;4.6;4.4;4.1;4.1;4.1;4.3;4.1;4.5;4.2;4.3;4.7
+"Fordypning i engelsk";"Begge kjønn";"Uoppgitt";3.2;3.7;3.7;..;3.9;3.7;..;..;4.2;3.6;3.8;2.8;..
+"Fordypning i engelsk";"Jenter";"Alle utdanningsnivå";4.2;4.4;4.5;4.3;4.4;4.1;4.0;4.4;4.2;4.4;4.4;4.2;4.6
+"Fordypning i engelsk";"Jenter";"Grunnskole eller ingen fullført utdanning";4.2;4.2;4.1;4.2;4.1;3.9;4.1;3.8;3.8;3.8;4.2;3.3;4.6
+"Fordypning i engelsk";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.0;4.3;4.5;4.3;4.5;4.2;3.7;4.5;4.1;4.3;4.3;4.0;4.4
+"Fordypning i engelsk";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.5;4.6;4.9;4.3;4.6;4.2;4.1;4.5;4.4;4.6;4.5;4.4;4.7
+"Fordypning i engelsk";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.5;4.8;4.7;4.3;4.3;4.7;4.2;4.2;4.7;4.3;4.6;5.0
+"Fordypning i engelsk";"Jenter";"Uoppgitt";..;4.0;3.8;..;..;3.8;..;..;4.4;3.8;..;..;..
+"Fordypning i engelsk";"Gutter";"Alle utdanningsnivå";3.8;4.0;4.0;4.0;3.9;3.9;3.9;4.0;4.0;4.1;4.0;3.9;4.4
+"Fordypning i engelsk";"Gutter";"Grunnskole eller ingen fullført utdanning";3.4;3.4;3.7;3.9;3.7;3.6;3.6;3.6;3.3;3.3;3.9;3.3;4.1
+"Fordypning i engelsk";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.8;3.8;3.8;4.0;3.9;3.8;3.8;3.9;3.9;4.0;4.0;3.8;4.3
+"Fordypning i engelsk";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.0;4.2;4.2;4.1;4.1;4.1;4.1;3.9;4.2;4.2;4.1;4.1;4.6
+"Fordypning i engelsk";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.2;4.3;4.5;4.1;4.0;4.0;3.5;4.4;4.1;4.3;4.2;4.1;4.6
+"Fordypning i engelsk";"Gutter";"Uoppgitt";..;..;..;..;..;..;..;..;4.0;3.4;..;..;..
+"Fransk I";"Begge kjønn";"Alle utdanningsnivå";4.2;4.4;4.5;4.6;4.2;4.3;4.5;4.5;4.2;4.3;4.6;4.4;4.5
+"Fransk I";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.8;3.8;3.8;3.9;3.8;3.2;..;3.6;3.2;3.5;..;3.7;3.6
+"Fransk I";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.8;3.9;3.9;4.4;4.0;3.8;4.3;4.1;3.7;3.8;4.2;4.0;4.3
+"Fransk I";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.4;4.5;4.6;4.3;4.2;4.7;4.6;4.1;4.1;4.6;4.4;4.7
+"Fransk I";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.6;4.7;4.7;5.0;4.5;4.7;4.9;4.9;4.6;4.7;5.0;4.7;4.5
+"Fransk I";"Begge kjønn";"Uoppgitt";..;..;..;..;..;0.0;0.0;..;..;..;0.0;..;..
+"Fransk I";"Jenter";"Alle utdanningsnivå";4.5;4.6;4.7;4.5;4.3;4.5;4.8;4.8;4.5;4.4;4.7;4.6;4.5
+"Fransk I";"Jenter";"Grunnskole eller ingen fullført utdanning";4.3;3.9;3.9;3.5;4.0;3.4;..;..;3.9;3.8;..;..;..
+"Fransk I";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.0;4.1;4.2;4.2;4.3;4.0;4.7;4.6;3.9;4.0;4.3;4.2;4.2
+"Fransk I";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.5;4.5;4.8;4.7;4.3;4.4;4.9;4.8;4.4;4.3;4.8;4.6;4.8
+"Fransk I";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.9;4.9;4.9;5.1;4.5;4.9;4.8;5.0;4.7;4.8;5.0;4.9;4.7
+"Fransk I";"Jenter";"Uoppgitt";..;..;..;..;..;0.0;0.0;..;..;..;0.0;..;..
+"Fransk I";"Gutter";"Alle utdanningsnivå";3.8;4.2;4.1;4.6;4.0;3.9;4.3;4.0;3.8;4.0;4.2;4.1;4.4
+"Fransk I";"Gutter";"Grunnskole eller ingen fullført utdanning";3.3;3.5;3.4;..;..;..;..;..;..;3.3;..;..;..
+"Fransk I";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.5;3.5;3.5;4.9;3.5;3.6;..;3.5;3.3;3.5;..;3.8;..
+"Fransk I";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";3.9;4.2;4.0;4.3;4.2;3.8;4.4;4.4;3.6;3.8;3.8;4.0;4.5
+"Fransk I";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.1;4.5;4.4;5.0;4.4;4.3;4.9;4.3;4.2;4.4;..;4.3;4.3
+"Fransk I";"Gutter";"Uoppgitt";..;..;..;0.0;..;0.0;0.0;0.0;..;..;0.0;0.0;0.0
+"Spansk I";"Begge kjønn";"Alle utdanningsnivå";4.3;4.3;4.5;4.3;4.3;4.0;4.2;4.4;4.3;4.3;4.2;4.3;4.3
+"Spansk I";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";4.0;3.7;3.6;4.0;3.9;3.1;3.7;3.2;3.8;3.6;3.6;3.6;4.0
+"Spansk I";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.0;3.9;4.0;4.1;4.1;3.7;3.9;4.1;3.9;4.0;3.9;3.9;4.1
+"Spansk I";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.3;4.4;4.3;4.3;4.1;4.3;4.4;4.3;4.3;4.2;4.3;4.3
+"Spansk I";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.6;4.7;4.6;4.6;4.4;4.6;4.7;4.6;4.5;4.4;4.7;4.7
+"Spansk I";"Begge kjønn";"Uoppgitt";..;4.6;4.6;..;..;..;..;..;4.3;..;..;..;..
+"Spansk I";"Jenter";"Alle utdanningsnivå";4.5;4.5;4.7;4.5;4.6;4.2;4.5;4.6;4.5;4.4;4.4;4.5;4.5
+"Spansk I";"Jenter";"Grunnskole eller ingen fullført utdanning";4.1;3.9;4.0;4.2;4.3;3.3;4.1;3.7;3.9;3.8;3.6;3.9;4.4
+"Spansk I";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.3;4.1;4.3;4.2;4.3;3.8;4.1;4.3;4.1;4.2;4.3;4.1;4.2
+"Spansk I";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.5;4.5;4.7;4.4;4.5;4.3;4.4;4.6;4.5;4.5;4.4;4.5;4.5
+"Spansk I";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.0;4.8;4.9;4.8;4.9;4.6;4.9;4.9;4.9;4.7;4.6;4.9;4.9
+"Spansk I";"Jenter";"Uoppgitt";..;..;5.2;..;..;..;..;..;..;..;..;..;..
+"Spansk I";"Gutter";"Alle utdanningsnivå";4.0;4.1;4.2;4.1;3.9;3.9;4.0;4.0;4.0;4.1;3.9;4.0;4.1
+"Spansk I";"Gutter";"Grunnskole eller ingen fullført utdanning";3.8;3.5;3.3;3.6;3.2;2.9;3.4;2.7;3.7;3.4;3.7;3.3;3.4
+"Spansk I";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.8;3.6;3.8;4.0;3.7;3.6;3.6;3.8;3.6;3.7;3.4;3.6;3.9
+"Spansk I";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.1;4.0;4.1;4.1;3.9;3.9;4.1;4.0;3.9;4.1;4.0;4.0;4.0
+"Spansk I";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.3;4.4;4.5;4.3;4.3;4.1;4.2;4.3;4.3;4.3;4.1;4.5;4.4
+"Spansk I";"Gutter";"Uoppgitt";..;..;4.2;..;..;0.0;0.0;..;..;..;..;..;..
+"Tysk I";"Begge kjønn";"Alle utdanningsnivå";4.2;4.4;4.5;4.2;4.2;4.1;4.2;4.2;4.3;4.2;4.2;4.2;4.3
+"Tysk I";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.5;4.0;3.7;4.0;3.5;3.7;3.4;3.7;3.9;3.5;3.8;3.6;3.6
+"Tysk I";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.7;4.0;3.9;3.9;3.8;3.7;4.0;3.8;4.0;3.8;3.9;3.7;3.9
+"Tysk I";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.3;4.4;4.3;4.3;4.1;4.2;4.2;4.2;4.2;4.2;4.2;4.4
+"Tysk I";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.7;4.8;4.5;4.6;4.3;4.6;4.5;4.6;4.5;4.6;4.5;4.5
+"Tysk I";"Begge kjønn";"Uoppgitt";..;..;..;..;..;..;..;..;4.6;..;..;..;0.0
+"Tysk I";"Jenter";"Alle utdanningsnivå";4.4;4.6;4.7;4.4;4.4;4.4;4.5;4.4;4.6;4.5;4.5;4.4;4.5
+"Tysk I";"Jenter";"Grunnskole eller ingen fullført utdanning";3.7;4.0;4.0;4.1;3.8;4.2;4.2;3.8;4.2;4.0;3.8;3.6;3.7
+"Tysk I";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.0;4.3;4.2;4.1;4.1;4.0;4.2;4.0;4.4;4.1;4.1;3.8;4.2
+"Tysk I";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.5;4.6;4.6;4.5;4.5;4.4;4.5;4.5;4.6;4.5;4.6;4.4;4.6
+"Tysk I";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.9;5.0;5.1;4.7;4.7;4.7;4.9;4.7;5.0;4.7;5.0;4.9;4.8
+"Tysk I";"Jenter";"Uoppgitt";..;..;..;..;0.0;..;..;..;..;..;0.0;..;0.0
+"Tysk I";"Gutter";"Alle utdanningsnivå";4.0;4.2;4.3;4.1;4.0;3.8;3.9;4.1;4.1;4.0;4.0;4.1;4.0
+"Tysk I";"Gutter";"Grunnskole eller ingen fullført utdanning";3.3;3.9;3.1;3.7;3.1;3.2;2.8;..;3.8;3.1;3.8;3.6;..
+"Tysk I";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.4;3.8;3.7;3.8;3.5;3.4;3.8;3.7;3.6;3.5;3.7;3.4;3.5
+"Tysk I";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.0;4.1;4.2;4.1;4.1;3.9;3.9;4.0;4.0;4.0;3.9;4.1;4.2
+"Tysk I";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.6;4.5;4.6;4.4;4.6;4.1;4.3;4.5;4.4;4.4;4.3;4.3;4.2
+"Tysk I";"Gutter";"Uoppgitt";..;..;0.0;..;..;..;0.0;0.0;..;0.0;..;..;0.0
+"Kunst og håndverk";"Begge kjønn";"Alle utdanningsnivå";4.4;4.5;4.6;4.5;4.4;4.4;4.4;4.5;4.5;4.5;4.4;4.3;4.5
+"Kunst og håndverk";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.9;3.9;4.0;4.0;3.9;3.8;3.9;3.8;3.9;3.8;3.9;3.7;3.9
+"Kunst og håndverk";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.2;4.3;4.3;4.3;4.2;4.2;4.2;4.3;4.3;4.3;4.3;4.1;4.3
+"Kunst og håndverk";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.5;4.6;4.6;4.6;4.5;4.5;4.5;4.6;4.5;4.5;4.4;4.5;4.6
+"Kunst og håndverk";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.7;4.9;4.8;4.7;4.7;4.7;4.7;4.7;4.6;4.7;4.6;4.7
+"Kunst og håndverk";"Begge kjønn";"Uoppgitt";4.0;3.8;4.1;4.1;3.9;3.7;4.0;4.6;4.0;4.2;3.9;3.7;4.1
+"Kunst og håndverk";"Jenter";"Alle utdanningsnivå";4.7;4.8;5.0;4.8;4.8;4.7;4.7;4.8;4.8;4.8;4.7;4.7;4.8
+"Kunst og håndverk";"Jenter";"Grunnskole eller ingen fullført utdanning";4.4;4.2;4.3;4.4;4.2;4.2;4.3;4.2;4.2;4.2;4.1;4.1;4.3
+"Kunst og håndverk";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.5;4.6;4.7;4.6;4.6;4.6;4.5;4.7;4.6;4.6;4.6;4.4;4.6
+"Kunst og håndverk";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.9;4.9;5.0;4.9;4.9;4.9;4.8;5.0;4.9;4.9;4.8;4.8;4.9
+"Kunst og håndverk";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.1;5.1;5.2;5.1;5.1;5.0;5.1;5.1;5.1;5.0;5.0;5.0;5.1
+"Kunst og håndverk";"Jenter";"Uoppgitt";4.5;4.2;4.3;4.4;4.2;3.9;4.4;4.9;4.3;4.5;4.4;3.7;4.4
+"Kunst og håndverk";"Gutter";"Alle utdanningsnivå";4.0;4.2;4.2;4.2;4.0;4.0;4.1;4.2;4.1;4.1;4.1;4.0;4.1
+"Kunst og håndverk";"Gutter";"Grunnskole eller ingen fullført utdanning";3.4;3.5;3.7;3.6;3.4;3.5;3.6;3.4;3.5;3.5;3.6;3.4;3.6
+"Kunst og håndverk";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.8;4.0;3.9;4.0;3.8;3.9;4.0;4.0;3.9;4.0;4.0;3.8;4.0
+"Kunst og håndverk";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.2;4.2;4.2;4.3;4.2;4.1;4.2;4.2;4.2;4.2;4.1;4.1;4.3
+"Kunst og håndverk";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.4;4.4;4.5;4.5;4.3;4.4;4.4;4.4;4.4;4.3;4.3;4.2;4.4
+"Kunst og håndverk";"Gutter";"Uoppgitt";3.6;3.5;3.9;4.0;3.5;3.5;3.5;4.3;3.6;3.9;3.7;3.7;3.9
+"Kroppsøving";"Begge kjønn";"Alle utdanningsnivå";4.7;4.7;4.9;4.6;4.8;4.6;4.6;4.7;4.7;4.7;4.6;4.6;4.6
+"Kroppsøving";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";4.1;4.0;4.3;4.0;4.2;3.9;4.1;4.0;4.0;4.1;4.0;4.0;4.1
+"Kroppsøving";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.5;4.5;4.6;4.4;4.6;4.4;4.4;4.5;4.5;4.5;4.4;4.3;4.4
+"Kroppsøving";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.8;4.8;5.0;4.8;4.9;4.8;4.8;4.8;4.8;4.8;4.7;4.7;4.8
+"Kroppsøving";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";5.0;5.0;5.2;5.0;5.1;5.0;4.9;5.0;5.0;5.0;5.0;4.9;4.9
+"Kroppsøving";"Begge kjønn";"Uoppgitt";3.8;3.9;4.3;4.3;4.2;3.7;4.3;4.2;4.1;4.2;3.5;3.7;4.2
+"Kroppsøving";"Jenter";"Alle utdanningsnivå";4.6;4.7;4.9;4.5;4.7;4.5;4.5;4.6;4.6;4.7;4.5;4.5;4.5
+"Kroppsøving";"Jenter";"Grunnskole eller ingen fullført utdanning";4.1;3.9;4.2;3.9;4.0;3.7;3.9;3.8;3.9;3.9;3.9;3.8;3.8
+"Kroppsøving";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.4;4.4;4.6;4.2;4.6;4.3;4.3;4.4;4.4;4.4;4.3;4.2;4.3
+"Kroppsøving";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.8;4.8;4.9;4.7;4.9;4.6;4.6;4.8;4.8;4.8;4.7;4.7;4.7
+"Kroppsøving";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.0;5.0;5.1;4.9;5.0;4.9;4.9;4.9;4.9;4.9;4.9;4.9;4.8
+"Kroppsøving";"Jenter";"Uoppgitt";3.5;3.6;3.9;4.0;4.0;3.7;..;4.1;4.0;4.2;3.2;3.3;4.2
+"Kroppsøving";"Gutter";"Alle utdanningsnivå";4.7;4.8;5.0;4.7;4.9;4.7;4.7;4.7;4.8;4.8;4.6;4.6;4.7
+"Kroppsøving";"Gutter";"Grunnskole eller ingen fullført utdanning";4.1;4.1;4.4;4.0;4.5;4.2;4.2;4.1;4.1;4.2;4.2;4.1;4.3
+"Kroppsøving";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";4.6;4.5;4.7;4.5;4.6;4.5;4.5;4.5;4.6;4.6;4.5;4.4;4.5
+"Kroppsøving";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.9;4.9;5.1;4.9;5.0;4.9;4.9;4.8;4.8;4.9;4.7;4.8;4.9
+"Kroppsøving";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";5.1;5.0;5.2;5.1;5.2;5.0;4.9;5.0;5.0;5.1;5.0;4.9;5.0
+"Kroppsøving";"Gutter";"Uoppgitt";4.0;4.1;4.6;4.4;4.3;3.8;..;4.3;4.2;4.2;3.7;4.1;4.3
+"Matematikk";"Begge kjønn";"Alle utdanningsnivå";3.5;3.7;4.0;3.5;3.6;3.5;3.5;3.7;3.7;3.7;3.6;3.6;3.5
+"Matematikk";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";2.8;2.7;3.0;2.7;2.8;2.5;2.7;2.6;2.7;2.6;2.8;2.6;2.7
+"Matematikk";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.1;3.2;3.4;3.1;3.3;3.0;3.1;3.2;3.2;3.2;3.3;3.1;3.2
+"Matematikk";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";3.7;3.7;4.0;3.7;3.8;3.6;3.7;3.8;3.8;3.8;3.7;3.7;3.6
+"Matematikk";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.2;4.3;4.5;4.3;4.2;4.1;4.1;4.2;4.3;4.3;4.3;4.3;4.2
+"Matematikk";"Begge kjønn";"Uoppgitt";2.8;3.0;3.1;3.0;3.2;2.9;3.3;3.5;3.0;3.2;2.9;3.0;3.0
+"Matematikk";"Jenter";"Alle utdanningsnivå";3.5;3.7;4.0;3.6;3.7;3.5;3.5;3.7;3.7;3.7;3.7;3.7;3.5
+"Matematikk";"Jenter";"Grunnskole eller ingen fullført utdanning";2.9;2.8;3.0;2.8;2.9;2.6;2.7;2.6;2.8;2.7;2.8;2.5;2.7
+"Matematikk";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";3.1;3.2;3.4;3.1;3.4;3.1;3.0;3.3;3.3;3.2;3.3;3.2;3.3
+"Matematikk";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";3.7;3.8;4.1;3.7;3.9;3.6;3.7;3.9;3.8;3.8;3.8;3.7;3.6
+"Matematikk";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.3;4.2;4.5;4.4;4.3;4.2;4.2;4.2;4.3;4.3;4.3;4.4;4.3
+"Matematikk";"Jenter";"Uoppgitt";2.9;2.8;3.2;3.2;3.0;3.2;..;3.9;2.9;3.4;3.0;2.7;3.4
+"Matematikk";"Gutter";"Alle utdanningsnivå";3.4;3.7;3.9;3.5;3.6;3.5;3.4;3.6;3.6;3.7;3.6;3.5;3.5
+"Matematikk";"Gutter";"Grunnskole eller ingen fullført utdanning";2.7;2.7;2.9;2.6;2.7;2.4;2.7;2.6;2.6;2.6;2.8;2.6;2.8
+"Matematikk";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.0;3.2;3.3;3.0;3.2;3.0;3.1;3.1;3.1;3.2;3.3;3.0;3.1
+"Matematikk";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";3.6;3.7;3.9;3.6;3.7;3.6;3.6;3.8;3.7;3.8;3.6;3.6;3.7
+"Matematikk";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.1;4.3;4.5;4.2;4.2;4.1;4.1;4.2;4.2;4.3;4.3;4.2;4.1
+"Matematikk";"Gutter";"Uoppgitt";2.8;3.2;3.0;2.9;3.3;2.6;..;..;3.0;3.1;2.9;3.2;2.7
+"Mat og helse";"Begge kjønn";"Alle utdanningsnivå";4.4;4.5;4.8;4.5;4.7;4.4;4.5;4.5;4.5;4.6;4.5;4.5;4.7
+"Mat og helse";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";4.0;3.9;4.3;3.9;4.2;3.8;3.9;3.8;3.9;3.9;4.1;3.9;4.2
+"Mat og helse";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.2;4.2;4.5;4.3;4.5;4.2;4.3;4.4;4.3;4.4;4.3;4.3;4.6
+"Mat og helse";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.6;4.6;4.9;4.7;4.8;4.5;4.6;4.6;4.6;4.7;4.6;4.6;4.8
+"Mat og helse";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.8;4.8;5.1;4.8;4.9;4.7;4.7;4.8;4.7;4.8;4.8;4.7;5.0
+"Mat og helse";"Begge kjønn";"Uoppgitt";3.8;3.7;3.9;3.7;3.9;3.7;3.9;4.0;4.0;3.8;3.7;3.5;4.3
+"Mat og helse";"Jenter";"Alle utdanningsnivå";4.8;4.8;5.1;4.8;4.9;4.8;4.8;4.9;4.9;4.9;4.8;4.8;5.0
+"Mat og helse";"Jenter";"Grunnskole eller ingen fullført utdanning";4.4;4.2;4.6;4.3;4.4;4.2;4.4;4.2;4.3;4.2;4.4;4.2;4.5
+"Mat og helse";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.6;4.5;4.8;4.6;4.8;4.5;4.6;4.7;4.6;4.7;4.6;4.6;4.9
+"Mat og helse";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.9;4.9;5.2;5.0;5.1;4.9;4.9;5.0;5.0;5.0;4.9;4.9;5.2
+"Mat og helse";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.1;5.1;5.3;5.1;5.2;5.1;5.1;5.1;5.1;5.1;5.0;5.0;5.3
+"Mat og helse";"Jenter";"Uoppgitt";4.2;3.9;4.2;3.8;4.3;4.2;..;4.5;4.2;4.3;..;3.7;4.5
+"Mat og helse";"Gutter";"Alle utdanningsnivå";4.1;4.3;4.5;4.2;4.4;4.1;4.2;4.2;4.2;4.3;4.2;4.2;4.4
+"Mat og helse";"Gutter";"Grunnskole eller ingen fullført utdanning";3.6;3.6;3.9;3.6;3.8;3.4;3.5;3.5;3.6;3.5;3.8;3.6;3.9
+"Mat og helse";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.9;4.0;4.1;4.1;4.1;3.9;4.0;4.0;4.0;4.1;4.0;4.0;4.3
+"Mat og helse";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.3;4.5;4.4;4.5;4.2;4.4;4.3;4.3;4.4;4.3;4.3;4.6
+"Mat og helse";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.5;4.6;4.8;4.5;4.6;4.4;4.4;4.5;4.4;4.6;4.5;4.4;4.7
+"Mat og helse";"Gutter";"Uoppgitt";3.3;3.5;3.7;3.6;3.5;3.1;..;..;3.8;3.5;3.5;3.4;4.1
+"Musikk";"Begge kjønn";"Alle utdanningsnivå";4.4;4.5;4.6;4.5;4.4;4.4;4.4;4.5;4.4;4.5;4.5;4.4;4.6
+"Musikk";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.9;3.7;4.0;3.9;3.8;3.7;3.7;3.8;3.7;3.8;3.9;3.8;4.0
+"Musikk";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.2;4.2;4.3;4.3;4.3;4.2;4.2;4.3;4.1;4.2;4.3;4.2;4.4
+"Musikk";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.6;4.5;4.7;4.6;4.6;4.6;4.6;4.6;4.5;4.6;4.6;4.5;4.8
+"Musikk";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.8;4.8;4.9;4.9;4.8;4.8;4.7;4.9;4.8;4.8;4.8;4.7;5.0
+"Musikk";"Begge kjønn";"Uoppgitt";3.8;3.6;3.8;3.8;4.1;3.7;3.7;4.3;3.9;3.8;4.0;3.5;4.0
+"Musikk";"Jenter";"Alle utdanningsnivå";4.7;4.7;4.8;4.7;4.6;4.7;4.6;4.8;4.7;4.7;4.7;4.6;4.9
+"Musikk";"Jenter";"Grunnskole eller ingen fullført utdanning";4.2;4.0;4.2;4.3;4.0;3.9;4.0;4.0;4.0;4.0;4.1;4.0;4.3
+"Musikk";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.5;4.4;4.5;4.5;4.5;4.5;4.4;4.5;4.4;4.5;4.5;4.4;4.7
+"Musikk";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.9;4.8;4.9;4.8;4.7;4.8;4.7;4.9;4.8;4.8;4.8;4.7;5.0
+"Musikk";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.1;5.0;5.1;5.1;5.0;5.0;5.0;5.1;5.0;4.9;5.0;5.0;5.2
+"Musikk";"Jenter";"Uoppgitt";4.2;3.8;3.8;4.2;4.0;4.2;4.1;4.6;4.1;4.0;4.2;3.5;4.4
+"Musikk";"Gutter";"Alle utdanningsnivå";4.1;4.3;4.5;4.2;4.3;4.2;4.3;4.3;4.2;4.3;4.2;4.2;4.4
+"Musikk";"Gutter";"Grunnskole eller ingen fullført utdanning";3.6;3.5;3.8;3.5;3.5;3.5;3.5;3.7;3.4;3.6;3.6;3.6;3.7
+"Musikk";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.9;3.9;4.1;4.0;4.0;4.0;4.1;4.1;3.9;4.0;4.1;4.0;4.2
+"Musikk";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.3;4.4;4.4;4.4;4.4;4.4;4.4;4.3;4.4;4.3;4.3;4.6
+"Musikk";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.6;4.6;4.8;4.6;4.6;4.6;4.5;4.7;4.6;4.6;4.6;4.5;4.7
+"Musikk";"Gutter";"Uoppgitt";3.4;3.5;3.7;3.6;4.2;3.2;..;3.7;3.7;3.6;3.8;3.5;3.6
+"Naturfag";"Begge kjønn";"Alle utdanningsnivå";4.1;4.2;4.4;4.1;4.2;4.0;4.1;4.2;4.2;4.2;4.1;4.1;4.2
+"Naturfag";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.6;3.4;3.6;3.3;3.5;3.2;3.4;3.2;3.3;3.3;3.4;3.1;3.4
+"Naturfag";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.8;3.8;4.0;3.7;3.9;3.6;3.8;3.8;3.8;3.9;3.8;3.7;3.9
+"Naturfag";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.3;4.5;4.3;4.3;4.2;4.3;4.4;4.3;4.3;4.2;4.2;4.3
+"Naturfag";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.6;4.9;4.7;4.7;4.6;4.6;4.7;4.7;4.7;4.7;4.6;4.7
+"Naturfag";"Begge kjønn";"Uoppgitt";3.4;3.5;3.4;3.5;3.6;3.4;3.6;4.0;3.5;3.4;3.2;3.1;3.6
+"Naturfag";"Jenter";"Alle utdanningsnivå";4.4;4.4;4.6;4.3;4.4;4.3;4.4;4.4;4.4;4.4;4.3;4.3;4.4
+"Naturfag";"Jenter";"Grunnskole eller ingen fullført utdanning";3.9;3.6;3.7;3.6;3.7;3.4;3.5;3.5;3.6;3.5;3.6;3.3;3.7
+"Naturfag";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.1;4.0;4.2;3.9;4.1;3.8;4.0;4.1;4.1;4.1;4.0;3.9;4.1
+"Naturfag";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.5;4.5;4.7;4.5;4.6;4.4;4.5;4.6;4.6;4.5;4.5;4.4;4.5
+"Naturfag";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.9;4.8;5.0;5.0;4.9;4.9;4.9;4.9;4.9;4.8;4.8;4.8;4.9
+"Naturfag";"Jenter";"Uoppgitt";3.6;3.6;3.6;3.8;3.8;3.8;..;4.1;3.7;3.7;3.2;3.0;4.2
+"Naturfag";"Gutter";"Alle utdanningsnivå";3.9;4.1;4.3;3.9;4.0;3.8;3.9;4.0;4.0;4.1;3.9;3.9;4.0
+"Naturfag";"Gutter";"Grunnskole eller ingen fullført utdanning";3.3;3.2;3.4;3.1;3.2;2.9;3.2;2.9;3.1;3.1;3.2;3.0;3.2
+"Naturfag";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.6;3.7;3.8;3.5;3.7;3.5;3.6;3.6;3.6;3.7;3.6;3.4;3.7
+"Naturfag";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.0;4.1;4.2;4.1;4.1;4.0;4.1;4.2;4.1;4.2;4.0;4.0;4.2
+"Naturfag";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.5;4.5;4.7;4.5;4.5;4.3;4.3;4.5;4.5;4.6;4.5;4.4;4.5
+"Naturfag";"Gutter";"Uoppgitt";3.2;3.4;3.2;3.3;3.4;2.7;..;..;3.3;3.1;3.2;3.1;3.1
+"Norsk hovedmål";"Begge kjønn";"Alle utdanningsnivå";3.8;4.0;4.0;3.9;3.8;3.8;3.8;3.8;3.9;3.9;3.8;3.8;3.9
+"Norsk hovedmål";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.3;3.3;3.2;3.2;3.2;3.1;3.0;3.1;3.2;3.1;3.2;3.0;3.2
+"Norsk hovedmål";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.5;3.6;3.5;3.6;3.6;3.5;3.5;3.5;3.6;3.6;3.6;3.4;3.6
+"Norsk hovedmål";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.0;4.0;4.0;4.0;3.9;3.8;3.9;3.9;4.1;3.9;3.9;4.0;4.0
+"Norsk hovedmål";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.3;4.3;4.4;4.3;4.2;4.2;4.2;4.2;4.3;4.2;4.2;4.2;4.4
+"Norsk hovedmål";"Begge kjønn";"Uoppgitt";2.9;3.1;2.8;3.3;2.7;2.9;3.2;3.3;3.0;3.0;3.1;2.5;2.5
+"Norsk hovedmål";"Jenter";"Alle utdanningsnivå";4.1;4.3;4.3;4.2;4.1;4.1;4.1;4.1;4.3;4.2;4.2;4.1;4.2
+"Norsk hovedmål";"Jenter";"Grunnskole eller ingen fullført utdanning";3.6;3.6;3.4;3.6;3.4;3.4;3.4;3.4;3.6;3.4;3.3;3.2;3.5
+"Norsk hovedmål";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";3.8;3.9;3.8;3.9;3.9;3.8;3.9;3.9;3.9;3.9;3.9;3.8;3.9
+"Norsk hovedmål";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.3;4.3;4.3;4.2;4.2;4.2;4.3;4.4;4.3;4.3;4.3;4.4
+"Norsk hovedmål";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.6;4.6;4.6;4.6;4.5;4.6;4.5;4.5;4.6;4.5;4.5;4.6;4.7
+"Norsk hovedmål";"Jenter";"Uoppgitt";3.2;3.2;3.0;3.3;2.6;3.1;..;3.5;3.0;3.5;3.3;2.8;..
+"Norsk hovedmål";"Gutter";"Alle utdanningsnivå";3.5;3.7;3.7;3.5;3.5;3.5;3.5;3.5;3.6;3.6;3.5;3.5;3.6
+"Norsk hovedmål";"Gutter";"Grunnskole eller ingen fullført utdanning";2.9;3.0;3.0;2.8;2.9;2.8;2.7;2.7;2.9;2.8;3.0;2.7;2.8
+"Norsk hovedmål";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.3;3.4;3.3;3.2;3.2;3.3;3.3;3.2;3.3;3.3;3.3;3.1;3.3
+"Norsk hovedmål";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";3.7;3.7;3.7;3.7;3.6;3.5;3.6;3.6;3.7;3.6;3.6;3.6;3.7
+"Norsk hovedmål";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";3.9;4.1;4.1;4.0;3.9;3.9;3.9;3.9;4.0;4.0;4.0;3.9;4.1
+"Norsk hovedmål";"Gutter";"Uoppgitt";2.7;2.9;2.7;3.3;2.7;2.7;..;..;2.9;2.6;2.9;2.3;..
+"Norsk sidemål";"Begge kjønn";"Alle utdanningsnivå";3.6;3.8;4.0;3.7;3.6;3.6;3.6;3.7;3.8;3.8;3.8;3.7;3.7
+"Norsk sidemål";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.1;3.2;3.3;3.2;3.1;2.8;2.9;3.0;3.2;3.1;3.3;2.9;3.1
+"Norsk sidemål";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.3;3.4;3.6;3.4;3.4;3.3;3.4;3.4;3.5;3.5;3.6;3.3;3.5
+"Norsk sidemål";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";3.7;3.8;4.0;3.9;3.7;3.6;3.7;3.9;3.9;3.9;3.9;3.8;3.8
+"Norsk sidemål";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.0;4.1;4.3;4.1;4.0;4.1;4.0;4.1;4.1;4.1;4.2;4.1;4.1
+"Norsk sidemål";"Begge kjønn";"Uoppgitt";3.2;3.3;2.9;..;2.8;..;..;..;3.4;3.2;..;..;..
+"Norsk sidemål";"Jenter";"Alle utdanningsnivå";3.9;4.1;4.3;4.0;3.9;3.9;3.9;4.0;4.2;4.1;4.1;4.0;4.0
+"Norsk sidemål";"Jenter";"Grunnskole eller ingen fullført utdanning";3.4;3.4;3.4;3.5;3.4;3.1;3.3;3.3;3.6;3.4;3.5;3.1;3.4
+"Norsk sidemål";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";3.5;3.7;3.9;3.7;3.7;3.6;3.7;3.7;3.8;3.8;3.9;3.6;3.8
+"Norsk sidemål";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.1;4.1;4.3;4.2;4.0;3.9;4.0;4.2;4.2;4.2;4.2;4.1;4.1
+"Norsk sidemål";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";4.4;4.4;4.5;4.4;4.3;4.3;4.3;4.3;4.4;4.4;4.5;4.5;4.4
+"Norsk sidemål";"Jenter";"Uoppgitt";3.5;3.6;..;..;..;..;..;..;..;3.4;..;..;..
+"Norsk sidemål";"Gutter";"Alle utdanningsnivå";3.3;3.5;3.8;3.4;3.4;3.4;3.3;3.4;3.6;3.6;3.5;3.4;3.4
+"Norsk sidemål";"Gutter";"Grunnskole eller ingen fullført utdanning";2.7;2.9;3.1;2.8;2.7;2.6;2.6;2.7;2.8;2.8;3.1;2.7;2.8
+"Norsk sidemål";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.0;3.1;3.3;3.1;3.1;3.0;3.0;3.1;3.3;3.2;3.2;3.0;3.1
+"Norsk sidemål";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";3.4;3.5;3.6;3.6;3.4;3.4;3.5;3.5;3.6;3.6;3.5;3.5;3.5
+"Norsk sidemål";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";3.7;3.9;4.0;3.9;3.7;3.9;3.7;3.8;3.9;3.9;3.9;3.8;3.7
+"Norsk sidemål";"Gutter";"Uoppgitt";..;3.1;..;..;..;..;0.0;0.0;..;2.9;..;..;..
+"Norsk, muntlig";"Begge kjønn";"Alle utdanningsnivå";4.2;4.4;4.4;4.2;4.2;4.2;4.1;4.2;4.3;4.3;4.2;4.1;4.3
+"Norsk, muntlig";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.7;3.7;3.7;3.6;3.7;3.5;3.5;3.4;3.5;3.5;3.6;3.3;3.5
+"Norsk, muntlig";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.0;4.0;4.0;3.9;4.0;3.9;3.9;3.9;4.0;4.0;3.9;3.7;4.0
+"Norsk, muntlig";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.4;4.5;4.5;4.4;4.4;4.3;4.3;4.3;4.4;4.4;4.3;4.3;4.4
+"Norsk, muntlig";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.8;4.8;4.7;4.6;4.7;4.6;4.6;4.7;4.7;4.6;4.6;4.8
+"Norsk, muntlig";"Begge kjønn";"Uoppgitt";3.5;3.5;3.4;3.8;3.1;3.3;3.6;3.8;3.4;3.4;3.4;2.8;3.2
+"Norsk, muntlig";"Jenter";"Alle utdanningsnivå";4.5;4.7;4.7;4.5;4.5;4.5;4.4;4.5;4.6;4.5;4.5;4.4;4.5
+"Norsk, muntlig";"Jenter";"Grunnskole eller ingen fullført utdanning";4.0;4.0;3.9;4.0;3.9;3.9;3.8;3.7;3.9;3.8;3.8;3.5;3.8
+"Norsk, muntlig";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.3;4.3;4.3;4.2;4.2;4.1;4.2;4.2;4.3;4.3;4.2;4.0;4.3
+"Norsk, muntlig";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.7;4.7;4.8;4.7;4.6;4.6;4.5;4.6;4.7;4.6;4.6;4.5;4.7
+"Norsk, muntlig";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.0;5.0;5.0;4.9;4.9;5.0;4.9;4.9;5.0;4.9;4.9;4.9;5.0
+"Norsk, muntlig";"Jenter";"Uoppgitt";3.7;3.6;3.7;3.6;3.0;3.5;..;4.0;3.3;3.8;3.7;2.9;..
+"Norsk, muntlig";"Gutter";"Alle utdanningsnivå";4.0;4.2;4.2;4.0;4.0;3.9;3.9;3.9;4.1;4.1;3.9;3.9;4.0
+"Norsk, muntlig";"Gutter";"Grunnskole eller ingen fullført utdanning";3.3;3.4;3.5;3.2;3.3;3.2;3.3;3.1;3.2;3.2;3.5;3.1;3.3
+"Norsk, muntlig";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.7;3.8;3.7;3.7;3.7;3.6;3.6;3.6;3.7;3.7;3.7;3.4;3.8
+"Norsk, muntlig";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.1;4.2;4.2;4.2;4.1;4.0;4.0;4.0;4.1;4.1;4.0;4.0;4.2
+"Norsk, muntlig";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.5;4.6;4.6;4.5;4.4;4.4;4.3;4.4;4.5;4.5;4.3;4.3;4.5
+"Norsk, muntlig";"Gutter";"Uoppgitt";3.3;3.4;3.1;4.0;3.2;3.2;..;..;3.5;3.0;3.2;2.6;..
+"Fordypning i norsk";"Begge kjønn";"Alle utdanningsnivå";4.5;3.9;3.6;4.1;4.1;3.7;3.4;4.0;3.9;..;4.5;4.1;4.0
+"Fordypning i norsk";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";..;3.6;3.4;..;..;..;..;..;..;0.0;..;..;..
+"Fordypning i norsk";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.6;4.4;3.3;..;4.4;3.7;..;3.6;4.0;..;4.1;..;4.4
+"Fordypning i norsk";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";..;3.7;4.0;..;..;4.1;..;4.4;3.9;..;4.7;..;..
+"Fordypning i norsk";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";0.0;4.1;3.9;..;..;..;..;..;3.9;0.0;..;..;..
+"Fordypning i norsk";"Begge kjønn";"Uoppgitt";..;..;3.5;..;..;..;0.0;..;..;0.0;..;..;0.0
+"Fordypning i norsk";"Jenter";"Alle utdanningsnivå";4.8;4.3;4.0;..;4.6;3.8;..;4.4;3.9;..;4.7;4.2;4.2
+"Fordypning i norsk";"Jenter";"Grunnskole eller ingen fullført utdanning";..;..;3.7;..;..;..;0.0;..;..;0.0;..;..;..
+"Fordypning i norsk";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.7;..;3.8;..;..;4.0;..;..;..;..;..;..;4.4
+"Fordypning i norsk";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";..;..;4.4;0.0;..;..;..;4.8;..;0.0;4.8;..;..
+"Fordypning i norsk";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";0.0;4.1;..;..;..;0.0;..;..;..;0.0;..;..;0.0
+"Fordypning i norsk";"Jenter";"Uoppgitt";..;..;..;0.0;0.0;..;0.0;..;..;0.0;0.0;..;0.0
+"Fordypning i norsk";"Gutter";"Alle utdanningsnivå";..;3.7;3.4;3.9;3.7;3.6;3.4;3.3;3.9;..;3.9;4.0;..
+"Fordypning i norsk";"Gutter";"Grunnskole eller ingen fullført utdanning";..;..;3.1;0.0;..;..;..;..;..;0.0;..;..;..
+"Fordypning i norsk";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";..;4.1;2.9;..;..;3.5;..;..;4.0;..;..;..;..
+"Fordypning i norsk";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";..;3.6;3.8;..;..;..;..;..;3.8;..;..;..;..
+"Fordypning i norsk";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";0.0;..;3.7;..;..;..;..;..;4.0;0.0;..;..;..
+"Fordypning i norsk";"Gutter";"Uoppgitt";0.0;..;..;..;..;..;0.0;..;..;0.0;..;0.0;0.0
+"Kristendom, religion, livssyn og etikk";"Begge kjønn";"Alle utdanningsnivå";4.2;4.4;4.5;4.2;4.3;4.1;4.2;4.3;4.3;4.3;4.2;4.2;4.2
+"Kristendom, religion, livssyn og etikk";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.7;3.7;3.8;3.6;3.8;3.4;3.5;3.5;3.6;3.4;3.7;3.4;3.4
+"Kristendom, religion, livssyn og etikk";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";3.9;4.0;4.1;3.9;4.0;3.8;3.9;4.0;3.9;3.9;4.0;3.8;4.0
+"Kristendom, religion, livssyn og etikk";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.4;4.4;4.6;4.4;4.4;4.2;4.3;4.4;4.4;4.4;4.3;4.3;4.4
+"Kristendom, religion, livssyn og etikk";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.8;4.9;4.7;4.6;4.6;4.6;4.8;4.7;4.7;4.7;4.6;4.7
+"Kristendom, religion, livssyn og etikk";"Begge kjønn";"Uoppgitt";3.3;3.4;3.6;3.7;3.3;3.4;3.6;4.0;3.6;3.4;3.4;3.2;3.4
+"Kristendom, religion, livssyn og etikk";"Jenter";"Alle utdanningsnivå";4.5;4.6;4.8;4.5;4.5;4.4;4.5;4.6;4.6;4.6;4.5;4.5;4.5
+"Kristendom, religion, livssyn og etikk";"Jenter";"Grunnskole eller ingen fullført utdanning";4.0;4.0;4.1;4.0;4.0;3.6;3.8;3.7;3.9;3.7;3.9;3.7;3.7
+"Kristendom, religion, livssyn og etikk";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.2;4.3;4.4;4.2;4.3;4.0;4.1;4.3;4.2;4.2;4.3;4.1;4.3
+"Kristendom, religion, livssyn og etikk";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.7;4.7;4.9;4.7;4.7;4.6;4.6;4.7;4.7;4.7;4.7;4.6;4.7
+"Kristendom, religion, livssyn og etikk";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.0;5.0;5.1;5.0;4.9;4.9;4.9;5.0;5.0;4.9;4.9;5.0;4.9
+"Kristendom, religion, livssyn og etikk";"Jenter";"Uoppgitt";3.6;3.4;4.1;3.9;3.4;3.8;..;4.2;3.7;4.0;4.0;3.3;3.9
+"Kristendom, religion, livssyn og etikk";"Gutter";"Alle utdanningsnivå";3.9;4.1;4.3;4.0;4.0;3.9;3.9;4.0;4.0;4.0;3.9;3.9;4.0
+"Kristendom, religion, livssyn og etikk";"Gutter";"Grunnskole eller ingen fullført utdanning";3.3;3.5;3.6;3.1;3.5;3.1;3.2;3.2;3.2;3.1;3.4;3.2;3.1
+"Kristendom, religion, livssyn og etikk";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.6;3.7;3.8;3.6;3.7;3.5;3.7;3.7;3.7;3.7;3.7;3.4;3.7
+"Kristendom, religion, livssyn og etikk";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.0;4.2;4.2;4.1;4.1;4.0;4.0;4.2;4.1;4.1;4.0;4.0;4.2
+"Kristendom, religion, livssyn og etikk";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.4;4.5;4.7;4.5;4.4;4.3;4.3;4.6;4.4;4.6;4.4;4.3;4.5
+"Kristendom, religion, livssyn og etikk";"Gutter";"Uoppgitt";3.0;3.5;3.3;3.6;3.2;2.8;..;..;3.4;3.0;2.9;3.0;2.9
+"Samfunnsfag";"Begge kjønn";"Alle utdanningsnivå";4.3;4.4;4.6;4.3;4.3;4.2;4.2;4.3;4.4;4.4;4.3;4.2;4.3
+"Samfunnsfag";"Begge kjønn";"Grunnskole eller ingen fullført utdanning";3.8;3.7;3.8;3.5;3.7;3.4;3.5;3.4;3.5;3.5;3.6;3.3;3.5
+"Samfunnsfag";"Begge kjønn";"Videregåendeskole-nivå eller påbygging videregående";4.0;4.0;4.1;3.9;4.0;3.9;3.9;4.0;4.0;4.0;4.0;3.8;4.1
+"Samfunnsfag";"Begge kjønn";"Universitets- og høgskolenivå, 4 år eller mindre";4.5;4.5;4.6;4.5;4.4;4.4;4.4;4.5;4.5;4.5;4.4;4.4;4.5
+"Samfunnsfag";"Begge kjønn";"Universitets- og høgskolenivå, mer enn 4 år";4.9;4.8;5.0;4.8;4.7;4.7;4.7;4.8;4.8;4.8;4.8;4.7;4.8
+"Samfunnsfag";"Begge kjønn";"Uoppgitt";3.4;3.4;3.6;3.6;3.4;3.4;3.7;4.1;3.7;3.4;3.3;3.1;3.7
+"Samfunnsfag";"Jenter";"Alle utdanningsnivå";4.5;4.6;4.7;4.5;4.5;4.4;4.4;4.5;4.6;4.5;4.5;4.4;4.5
+"Samfunnsfag";"Jenter";"Grunnskole eller ingen fullført utdanning";4.0;3.8;4.0;3.9;3.9;3.5;3.6;3.5;3.8;3.7;3.8;3.4;3.7
+"Samfunnsfag";"Jenter";"Videregåendeskole-nivå eller påbygging videregående";4.2;4.2;4.3;4.1;4.2;4.0;4.1;4.2;4.2;4.2;4.2;4.0;4.3
+"Samfunnsfag";"Jenter";"Universitets- og høgskolenivå, 4 år eller mindre";4.7;4.7;4.8;4.6;4.6;4.6;4.6;4.6;4.7;4.6;4.6;4.6;4.7
+"Samfunnsfag";"Jenter";"Universitets- og høgskolenivå, mer enn 4 år";5.1;5.0;5.1;5.0;4.9;5.0;4.9;5.0;5.0;4.9;5.0;4.9;4.9
+"Samfunnsfag";"Jenter";"Uoppgitt";3.6;3.4;3.8;3.6;3.4;3.8;..;4.4;3.7;3.8;3.5;3.0;4.2
+"Samfunnsfag";"Gutter";"Alle utdanningsnivå";4.1;4.3;4.4;4.1;4.1;4.1;4.1;4.2;4.2;4.2;4.1;4.1;4.1
+"Samfunnsfag";"Gutter";"Grunnskole eller ingen fullført utdanning";3.5;3.5;3.6;3.1;3.4;3.3;3.4;3.3;3.2;3.2;3.5;3.2;3.3
+"Samfunnsfag";"Gutter";"Videregåendeskole-nivå eller påbygging videregående";3.8;3.9;3.9;3.7;3.8;3.7;3.8;3.8;3.8;3.8;3.8;3.6;3.8
+"Samfunnsfag";"Gutter";"Universitets- og høgskolenivå, 4 år eller mindre";4.3;4.3;4.4;4.3;4.2;4.2;4.2;4.3;4.3;4.3;4.1;4.2;4.3
+"Samfunnsfag";"Gutter";"Universitets- og høgskolenivå, mer enn 4 år";4.7;4.7;4.8;4.7;4.6;4.6;4.5;4.6;4.7;4.7;4.6;4.5;4.7
+"Samfunnsfag";"Gutter";"Uoppgitt";3.2;3.4;3.4;3.5;3.4;2.9;..;..;3.6;3.1;3.2;3.2;3.2

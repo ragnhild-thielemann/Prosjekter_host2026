@@ -1,0 +1,98 @@
+"07500: Eksamenskarakterer, etter fag, innvandringskategori, år og kjønn"
+"fag";"innvandringskategori";"Gjennomsnittlig eksamenskarakter 2026 Begge kjønn";"Gjennomsnittlig eksamenskarakter 2026 Jenter";"Gjennomsnittlig eksamenskarakter 2026 Gutter"
+"Engelsk, skriftlig";"Alle elever";4.1;4.2;4.0
+"Engelsk, skriftlig";"Innvandrere";3.6;3.8;3.5
+"Engelsk, skriftlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";4.2;4.4;4.1
+"Engelsk, skriftlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.4;3.5;3.3
+"Engelsk, skriftlig";"Norskfødte med innvandrerforeldre";4.1;4.3;4.0
+"Engelsk, skriftlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";4.3;4.4;4.1
+"Engelsk, skriftlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.1;4.3;3.9
+"Engelsk, skriftlig";"Den øvrige befolkning";4.2;4.3;4.1
+"Engelsk, muntlig";"Alle elever";4.6;4.8;4.5
+"Engelsk, muntlig";"Innvandrere";4.4;4.5;4.3
+"Engelsk, muntlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";4.8;5.0;4.7
+"Engelsk, muntlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.2;4.2;4.1
+"Engelsk, muntlig";"Norskfødte med innvandrerforeldre";4.7;4.9;4.5
+"Engelsk, muntlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";4.8;4.9;4.7
+"Engelsk, muntlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.6;4.9;4.4
+"Engelsk, muntlig";"Den øvrige befolkning";4.6;4.8;4.5
+"Matematikk, skriftlig";"Alle elever";3.5;3.4;3.5
+"Matematikk, skriftlig";"Innvandrere";2.9;2.9;3.0
+"Matematikk, skriftlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";3.4;3.4;3.4
+"Matematikk, skriftlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";2.7;2.7;2.8
+"Matematikk, skriftlig";"Norskfødte med innvandrerforeldre";3.2;3.2;3.3
+"Matematikk, skriftlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";3.6;3.5;3.7
+"Matematikk, skriftlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.1;3.1;3.1
+"Matematikk, skriftlig";"Den øvrige befolkning";3.6;3.5;3.6
+"Matematikk, muntlig";"Alle elever";0.0;0.0;0.0
+"Matematikk, muntlig";"Innvandrere";0.0;0.0;0.0
+"Matematikk, muntlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";0.0;0.0;0.0
+"Matematikk, muntlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";0.0;0.0;0.0
+"Matematikk, muntlig";"Norskfødte med innvandrerforeldre";0.0;0.0;0.0
+"Matematikk, muntlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";0.0;0.0;0.0
+"Matematikk, muntlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";0.0;0.0;0.0
+"Matematikk, muntlig";"Den øvrige befolkning";0.0;0.0;0.0
+"Matematikk, muntlig-praktisk";"Alle elever";4.2;4.3;4.1
+"Matematikk, muntlig-praktisk";"Innvandrere";3.8;3.9;3.6
+"Matematikk, muntlig-praktisk";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";4.1;4.3;3.9
+"Matematikk, muntlig-praktisk";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.7;3.8;3.5
+"Matematikk, muntlig-praktisk";"Norskfødte med innvandrerforeldre";4.1;4.3;3.9
+"Matematikk, muntlig-praktisk";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";4.2;4.3;4.1
+"Matematikk, muntlig-praktisk";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.0;4.3;3.8
+"Matematikk, muntlig-praktisk";"Den øvrige befolkning";4.2;4.3;4.2
+"Naturfag, muntlig";"Alle elever";0.0;0.0;0.0
+"Naturfag, muntlig";"Innvandrere";0.0;0.0;0.0
+"Naturfag, muntlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";0.0;0.0;0.0
+"Naturfag, muntlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";0.0;0.0;0.0
+"Naturfag, muntlig";"Norskfødte med innvandrerforeldre";0.0;0.0;0.0
+"Naturfag, muntlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";0.0;0.0;0.0
+"Naturfag, muntlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";0.0;0.0;0.0
+"Naturfag, muntlig";"Den øvrige befolkning";0.0;0.0;0.0
+"Naturfag, muntlig-praktisk";"Alle elever";4.3;4.4;4.2
+"Naturfag, muntlig-praktisk";"Innvandrere";3.8;3.9;3.7
+"Naturfag, muntlig-praktisk";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";4.1;4.2;4.0
+"Naturfag, muntlig-praktisk";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.7;3.8;3.6
+"Naturfag, muntlig-praktisk";"Norskfødte med innvandrerforeldre";4.1;4.3;4.0
+"Naturfag, muntlig-praktisk";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";4.3;4.6;4.2
+"Naturfag, muntlig-praktisk";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.1;4.2;4.0
+"Naturfag, muntlig-praktisk";"Den øvrige befolkning";4.4;4.5;4.3
+"Norsk hovedmål, skriftlig";"Alle elever";3.5;3.8;3.2
+"Norsk hovedmål, skriftlig";"Innvandrere";3.0;3.2;2.8
+"Norsk hovedmål, skriftlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";3.3;3.6;3.1
+"Norsk hovedmål, skriftlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";2.9;3.0;2.7
+"Norsk hovedmål, skriftlig";"Norskfødte med innvandrerforeldre";3.3;3.6;3.0
+"Norsk hovedmål, skriftlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";3.4;3.7;3.2
+"Norsk hovedmål, skriftlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.3;3.5;3.0
+"Norsk hovedmål, skriftlig";"Den øvrige befolkning";3.6;3.9;3.3
+"Norsk sidemål, skriftlig";"Alle elever";3.5;3.7;3.3
+"Norsk sidemål, skriftlig";"Innvandrere";3.2;3.4;3.0
+"Norsk sidemål, skriftlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";3.3;3.6;3.1
+"Norsk sidemål, skriftlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.1;3.4;2.9
+"Norsk sidemål, skriftlig";"Norskfødte med innvandrerforeldre";3.3;3.6;3.1
+"Norsk sidemål, skriftlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";3.3;3.5;3.2
+"Norsk sidemål, skriftlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.3;3.6;3.0
+"Norsk sidemål, skriftlig";"Den øvrige befolkning";3.5;3.8;3.3
+"Norsk, muntlig";"Alle elever";4.5;4.7;4.2
+"Norsk, muntlig";"Innvandrere";4.0;4.2;3.7
+"Norsk, muntlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";4.3;4.7;4.0
+"Norsk, muntlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.8;4.0;3.6
+"Norsk, muntlig";"Norskfødte med innvandrerforeldre";4.3;4.6;4.0
+"Norsk, muntlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";4.6;4.8;4.5
+"Norsk, muntlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.2;4.5;3.9
+"Norsk, muntlig";"Den øvrige befolkning";4.5;4.8;4.2
+"Kristendom, religion, livssyn og etikk, muntlig";"Alle elever";4.4;4.7;4.2
+"Kristendom, religion, livssyn og etikk, muntlig";"Innvandrere";4.0;4.3;3.8
+"Kristendom, religion, livssyn og etikk, muntlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";4.4;4.6;4.1
+"Kristendom, religion, livssyn og etikk, muntlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.9;4.1;3.7
+"Kristendom, religion, livssyn og etikk, muntlig";"Norskfødte med innvandrerforeldre";4.4;4.6;4.1
+"Kristendom, religion, livssyn og etikk, muntlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";4.4;4.8;4.0
+"Kristendom, religion, livssyn og etikk, muntlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.4;4.6;4.1
+"Kristendom, religion, livssyn og etikk, muntlig";"Den øvrige befolkning";4.5;4.7;4.3
+"Samfunnsfag, muntlig";"Alle elever";4.5;4.6;4.3
+"Samfunnsfag, muntlig";"Innvandrere";4.0;4.1;3.9
+"Samfunnsfag, muntlig";"Innvandrere fra EU/EFTA, USA, Canada, Australia og New Zealand";4.2;4.3;4.1
+"Samfunnsfag, muntlig";"Innvandrere fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";3.9;4.0;3.8
+"Samfunnsfag, muntlig";"Norskfødte med innvandrerforeldre";4.3;4.4;4.2
+"Samfunnsfag, muntlig";"Norskfødte med innvandrerforeldre fra EU/EFTA, USA, Canada, Australia og New Zealand";4.4;4.5;4.3
+"Samfunnsfag, muntlig";"Norskfødte med innvandrerforeldre fra Asia, Afrika, Latin-Amerika, Oseania unntatt Australia og New Zealand, og Europa utenom EU/EFTA";4.2;4.4;4.1
+"Samfunnsfag, muntlig";"Den øvrige befolkning";4.6;4.7;4.4

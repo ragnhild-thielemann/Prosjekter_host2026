@@ -1,0 +1,141 @@
+---
+title: "Skoleprestasjoner"
+format: docx
+---
+
+## Resultater i privat og offenlig skole
+Er det lettere å få gode standpunktkaratkerer på private skoler? Det er lett å finne myter om at man betaler seg til bedre karatkerer i det private, så det er intressant å se om forveningsverdien er høyere på private skoler. 
+
+I analysen bruker vi et datasett fra SSB, der vi har forklaringsvariablene for en gjennomsnittskarakter: *år*, *offentlig/privat*, *fag* og *standpunkt/eksamen*. Da dette er relativt mange forklarignsvariabler, har SSB formatert tabeller med forklaringsvariabler langs både rader og kolonner. Dette gjør at en nedlastet .csv/.xlcx-fil er vanskelig å håndrere.
+
+SSB har dog et API, som er et verkøy for å transporer data uten å gå gjennom et brukergrensesnitt. I tillegg vil scriptet vi skriver oppdatetes når dataen oppdateres, da analysen ikke bygger på et nedlastet datasett. 
+
+```{r}
+#| output: false
+#| echo: false
+  
+library(httr2) #henter httr-adresser
+library(jsonlite) #for å rense API-et
+library(tidyverse)
+library(janitor) #for å gjøre kolonnetitlene gunstige å jobbe med
+library(workflows)
+library(tidymodels)
+```
+
+## Hente inn API-et
+
+Å hente inn data fra et API kan gjøres på vesentlig enklere måter enn det jeg har gjort her. Jeg ønsket imidlertid å undersøke hva som faktisk skjer når man importerer data fra et API, og hvordan datastrukturen er bygget opp. Ved først å hente inn metadataen kunne jeg undersøke de nestede objektene og finne frem til informasjonen jeg trengte. Dette ga meg en bedre forståelse av hvordan API-et er strukturert. Med utgangspunkt i variabel- og kategorinavnene laget jeg deretter en designmatrise, før jeg hentet ut de aktuelle resultatene fra API-et.
+
+```{r}
+url <- "https://data.ssb.no/api/pxwebapi/v2/tables/07501/metadata?lang=no" # leser inn metadata fra API-et
+
+data <- request(url) |>
+  req_perform() |> # sender HTTP-forespørselen til API-et
+  resp_body_json() # tolker JSON-responsen som et R-objekt vi kan arbeide videre med
+
+# Variablene i API-et ligger under "dimension".
+# På denne måten kan man se på APIet som et vektorrom, der observasjonene er antall rader, og antall kovariater er dimensjonen til vektorrommet. 
+hent_verdier <- function(x) { # henter verdiene fra en dimensjon, da disse er nestede variabler
+  names(x$category$label)
+}
+
+# Henter ut verdiene vi skal arbeide med
+skolefag <- hent_verdier(data$dimension$Skolefag2)
+eierforhold <- hent_verdier(data$dimension$EierforhSkole)
+foreldreutdanning <- hent_verdier(data$dimension$ForeldrUtd)
+ar <- hent_verdier(data$dimension$Tid)
+
+# Lager en designmatrise som inneholder alle kombinasjoner
+# av verdiene vi ønsker å hente fra API-et.
+design <- expand_grid(
+  skolefag = skolefag,
+  eierforhold = eierforhold,
+  foreldreutdanning = foreldreutdanning,
+  ar = ar
+)
+
+url <- "https://data.ssb.no/api/pxwebapi/v2/tables/07501/data"
+
+eksamenskarakter <- request(url) |>
+  req_url_query(
+    lang = "no",
+    `valueCodes[Skolefag2]` = paste(unique(design$skolefag), collapse = ","),
+    `valueCodes[EierforhSkole]` = paste(unique(design$eierforhold), collapse = ","),
+    `valueCodes[ForeldrUtd]` = paste(unique(design$foreldreutdanning), collapse = ","),
+    `valueCodes[Tid]` = paste(unique(design$ar), collapse = ","),
+    `valueCodes[ContentsCode]` = "Eksamenskarakter",
+    outputFormat = "csv",
+    outputFormatParams = "UseTexts"
+  ) |>
+  req_perform() |>
+  resp_body_string() |>
+  read_csv(show_col_types = FALSE)
+
+View(eksamenskarakter)
+```
+
+Designmatrisen fungerer her som et kartesisk produkt av de valgte dimensjonene. Ved å spesifisere hvilke verdier som skal inngå, kan jeg kontrollere hvilke kombinasjoner av fag, eierforhold, foreldrenes utdanning og år som hentes fra API-et. På denne måten kan jeg begrense uttrekket til informasjonen jeg faktisk trenger.
+
+
+Vi har nå lastet inn datasettet, og er klare for å behandle det. Da datasettet er rotete, må vi omgjøre det til et tidy format, der vi setter en observasjon per fag.
+```{r}
+
+bearbeidet <- eksamenskarakter |>
+  pivot_longer(cols = -(1:3),
+               names_prefix = "Gjennomsnittlig karakter",
+               names_to = "Ar",
+               values_to = "Karakter")|>
+  filter(!Karakter %in% c(".","..")) |>#fjerner radene med manglende observasjoner
+  filter(eierforhold %in% c("Offentlig","Privat")) |> #ønsker bare å se på offenlig mot privat
+  mutate(skolefag = word(fag,1), vurdering = word(fag,-1)) |>
+  select(-fag)|>
+ #gjør at den kjenner igjen at vi jobber med år
+  janitor::clean_names() #gjør kolonnetitlene gunstige å jobbe med 
+
+
+
+View(bearbeidet)
+```
+
+## Inflasjonen i seksere
+
+Er det slik at vi har blitt smartere? Et enkelt plott for å vise dette, er å se på utviklignen i karakterene våre over tid. Et annet aspekt er om korrelasjonen mellom standpunktkaratkernee og eksamenskarakterene i det gitte faget har avtatt. 
+
+
+```{r}
+
+library(lubridate)
+utvikling <- bearbeidet |>
+  group_by(ar,vurdering) |>
+  summarise(karakter = mean(as.numeric(karakter)))|>
+  ungroup()|>
+  mutate(vurdering = as.factor(vurdering))|>
+  mutate(ar = as.numeric(ar))
+  
+
+View(utvikling)
+sekserinflasjon <- utvikling |>
+  ggplot(aes(x = ar, y = karakter,color = vurdering) )+
+  geom_point () +
+  labs(y = "gjennomsnittkarakter i alle fag", title = "Utviklingen av gjennomsnittskarakter", color = "Vurderingsform")
+
+
+  
+sekserinflasjon
+
+  
+
+
+
+```
+
+Nå er vi klare til å trene modeller basert på dataen, for å predikere skoleresultatene. Vi trener fire ulike modeller *XGboost*, *linjær regresjon*, *LASSO* og *random forest*.
+
+
+```{r}
+
+
+
+
+```
+

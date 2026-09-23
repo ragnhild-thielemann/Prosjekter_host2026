@@ -5,12 +5,118 @@ format: docx
 
 
 
+Det første vi gjør, er å imporere de bibliotekene vi trenger for å løse oppgaven, samt gjøre datasettet vårt enkelt å håndtere for vidre jobbing.
 ```{r}
+#| echo: false 
+#| output: false
+
 library(tidyverse)
-library(readxl)
+library(readxl) 
+library(scales) 
+library(janitor)
 
+theme_set(theme_bw()) #velger tema for plottene, slik at de ser pene ut
 
-co2 <- read_xlsx("co2.xlsx")
-View(co2)
+co2 <- readxl::read_excel("co2.xlsx") |>#imporerer datasettet vi trenger
+  janitor::clean_names()|> #gjør kolonnenavn til små bokstarver, og erstatter mellomrom med _
+  drop_na ()  #fjerner tomme dataceller
+   #garanterer at den skjønner at year er et år
 
 ```
+
+### USA og Kinas kummulative utslipp
+
+Det første vi gjør, er å se på USA og Kinas kummulative utslipp fra 1800 og frem til i dag. Vi ser at Kina ikke begynner å slippe ut co2 før i 1900, og har relativt marginale utslipp frem til 1950, før kulturrevulusjonen treffer og Kinas økonomiske vekst starter. Innen 1950 har USA fått i gang mye industri, og har derfor sluppet ut store mengder co2 i atmosfæren. Dermed blir USAs kummulative utslipp liggende langt over Kinas kummulative utslipp. 
+
+```{r}
+
+p1 <- co2|>
+  filter(code == c("USA","CHN")) |>
+  ggplot(aes(year, co2, color = entity)) + 
+  geom_line() + 
+  scale_y_continuous(labels = label_comma (scale = 1e-9)) + #endrer aksene våre, og deler aksene (som er kontinuelig) til verdi i milliarder tonn. Dette opplyser vi om når vi lager aksetidlene
+  labs(x = "Year", y = "Co2 i milliarder tonn", color = "Land")
+
+p1
+
+```
+
+I debatten om klimakutt blir Kina dog anklaget for å ha hatt en enorm vekst i klimagassutslipp. Derfor lager vi et plott som viser økningen i klimagassutslippp. 
+
+
+```{r}
+
+p2 <- co2 |>
+  arrange(code,year) |> #sorterer først på landkode, og så på år
+  mutate(increase = (co2-lag(co2)),.by = code)|>
+  filter(code ==c("USA","CHN")) |>
+  filter(between(year,1900,2500))|>
+  ggplot(aes(x = year, y = increase, color = entity)) + 
+  geom_line() +
+  scale_y_continuous(labels = label_comma (scale = 1e-9)) + 
+  labs(x = "Year", y = "co2 i (milliarder tonn)", title = "Okning i co2", color = "Land")
+  
+  
+  
+
+p2
+  
+```
+
+
+```{r}
+
+us <- co2 |>
+  arrange(year)|>
+  filter(code == "USA")|>
+  select(year,co2)
+
+chn <- co2 |>
+  arrange(year)|>
+  filter(code == "CHN")|>
+  select(year,co2)
+
+global <- co2 |>
+  arrange(year)|>
+  summarise(co2 = sum(co2), .by = year)|>
+  left_join(us,by = "year", suffix = c("","_usa"))|>
+  left_join(chn,by = "year", suffix = c("","_china"))|>
+  #kombinerer de to tibblene med hensyn på år. Da de har to kolonner med samme navn, legger vi til _usa etter co2, slik at disse ikke merger sammen
+  mutate(andel_Usa = co2_usa/co2) |>
+  mutate(andel_Cina = co2_china/co2)|>
+  select(-c(co2_usa,co2_china,co2))|>
+  pivot_longer(cols = -year,
+               names_prefix = "andel_",
+               names_to = "Land",
+               values_to = "Utslipp")|>
+  ggplot(aes(x = year, y = Utslipp, color = Land)) + 
+  geom_line() +
+  scale_y_continuous(labels = label_comma(scale = 1e2)) +
+  labs(y = "Utslipp (i prosent)", title = "Andel av  verdens totale utslipp")
+
+global
+
+```
+
+
+```{r}
+
+library(countrycode)
+library(sf)
+kontinent <- co2 |>
+  mutate(Kontinent = countrycode(code, 
+                                 "iso3c",
+                                 "continent"))|>
+  group_by(Kontinent, year) |>
+  summarise(total = sum(co2))|>
+  ungroup() |>
+  ggplot(aes(x = year, y = total, stat = Kontinent, fill = Kontinent)) +
+  geom_area() +
+  scale_y_continuous(label = label_comma(scale = 1e-9))+
+  labs(x= "Year", y = "Totale utslipp (milliarder tonn co2)", title = "Kummulerte utslipp fordelt på kontinenter")
+
+kontinent
+         
+
+```
+
