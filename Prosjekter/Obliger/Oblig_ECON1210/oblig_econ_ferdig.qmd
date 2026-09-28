@@ -1,0 +1,243 @@
+---
+title: "Obligatorisk oppgave"
+subtitle: "ECON1210"
+date: "Høst 2026"
+author: "Ragnhild Thielemann"
+execute:
+  echo: false
+  warning: false
+format: docx
+---
+
+
+## Oppgave 1:
+
+a)	En stykkskatt gir større prisøkning for kjøperene desto brattere etterspøselskskurven er. Ved en bratt etterspøselskurve er konsumentene lite prissensitive, slik at en liten endring i pris gjør at etterspurt kvantum endres lite. 
+Når det ilegges en stykkskatt $t$, blir bedriftnnes kostnader $P_{kostnad} = P_{produksjon} + t$. Dette gir et negativt skift i tilbudskurven. Dette gir bevegelse langs etterspøselskurven, og det blir en ny likevektspris $P_1$, som er prisen konsumentene betaler. Det dannes da en kile mellom bedriftenes produksjonskostander og prisen i markedet, ved $P_K - P_p = t$. Denne avgiften deles mellom produskent og konsument, ved at konsumentne betaler $P_1-P_0$ (økningen i prisen fra det opprinnlige scenarioet), mens produsentene betaler $P_0 - P_1 + t$. Av disse likningen ser vi at ved en stor endring i pris (som følge av lite elastisk etterspøsel), vil en stor andel av avgiften falle på konsumentene. Disse arealene er markert i *figur 1*
+
+
+
+b)	Tallverdien til priselasisiteten øker når vi beveger oss opp langs en linjær etterspørselskurve. Etterspørselselasisiteten er et mål på hvor prissensistive vi er, og er gitt ved 
+
+$$\frac{Endring_{kvantum}}{Endring_{pris}} = \frac{\frac{\delta X}{X}}{\frac{\delta p}{p}} = \frac{\delta X}{\delta P} \frac{P}{X}$$ 
+
+```{r}
+#| output: false
+#| warning: false
+#| echo: false
+
+library(tidyverse)
+```
+
+```{r}
+
+#| echo: false
+#| warning: false
+
+
+
+
+f <- function(x){
+  return (-2*x + 6)
+}
+data <- tibble(x = seq(1,10,1), y = f(x))|>
+  ggplot(aes(x,y))+
+  geom_line() + 
+  labs(x = "Etterspurt kvantum" ,y= "Pris pa varen", title = "Ettersporselskurve")
+
+
+data
+
+
+```
+Da vi har en linjær etterspøselskurve holdes $-\frac{\delta X}{\delta P}$ konstant, da dette er stigningstallet til etterspøselskurven. (negativt, da det er en fallende kurve). Variablen er dermed$\frac{P}{X}$ . Vi ser at når vi beveger oss oppover kurven, blir prisen høyere, samt etterspurt kvantum lavere, slik at denne tallverdien blir høyere. Dette gir mening, da vi er mer prissensitive ved høyere pris og når etterspøselen i utgangpuntet er lav. 
+
+
+c)	Dersom myndighetene ønsker å støtte forfattere og øke bokprosukdjsonen ved å gi en subsidie per bok, spiller det ingen rolle hvorhvidt forlagene eller forfatterene selv får utbetalt subsidien. Vi har tidligere vist at subsidien deles mellom produsentene (forfatterene) og konsumentne (forlagene), så de er indifferente til hvem som får utbetalt subsidien. 
+
+d)	Det er mange faktorer som påvirker etterspøselen av en vare. I ECON1210 ser vi særlig på antall tilbydere i markedet, samt tilbydernes produksjonskostnader, inntekten hos kjøperne, samt andelen av konsumentenes inntekt som går til å kjøpe varen, og pris på substitutter (andre varer og tjenester). 
+
+## Oppgave 2
+Vi ser på markedet for PTer i en by, og antar at dette kan modelleres med et fullkomment marked (dvs at vi antar homogene produkter, fri etablering, full informasjon, at PTene er prisfaste kvantumstilpassere samt alle aktørene som rasjonelle). 
+
+a) Det første vi skal se på, er dersom en stor bedrift kjøpre mange PT-timer til sine ansatte. Dette vil være et etterspøselssjokk, da det vil etterspørres et høyere kvantum til enhver pris. Vi antar at det skjer et parallelt skift i figuren, altså at priselastisistenen holdes konstant. 
+
+
+```{r}
+
+#| echo: false
+
+#| warning: false
+
+E_1 <- function(x){
+  return (-2*x + 8)
+  
+  
+}
+
+E_2 <-  function(x){
+  return (-2*x + 12)
+  
+}
+T_ <- function(x){
+  return(2*x)
+}
+data <- tibble(x = seq(1,4,1), E_For = E_1(x), E_Etter = E_2(x))|>
+  pivot_longer(cols = - x,
+               names_prefix = "E_",
+               names_to = "Tid",
+               values_to = "E"
+               )|>
+  ggplot()+
+  geom_line(aes(x = x , y = E, color = Tid) )+ 
+   geom_line(aes(x = x, y = T_(x))) + 
+  labs(x = "Etterspurt kvantum" ,y= "Pris pa varen", title = "Skift i ettersposelskurven") +
+  geom_point(aes(x = 3, y = E_2(3)))+ 
+  geom_label(aes(x = 3, y = E_2(3), label = "L2"))+
+  geom_point(aes(x = 2, y = E_1(2)))+ 
+  geom_label(aes(x = 2, y = E_1(2), label = "L1"))
+ 
+
+
+data
+
+
+```
+Vi ser at vi får en ny likevekt, med en høyere pris, og et høyere etterspurt kvantum. 
+
+b) Dersom det kommer mange nye PT-er til byen, får vi et skift i tilbudskurven, men i motsetning til i forrgje oppgave, vil helningen til kurven endres. Vi antar at det kommer flere aktører inn på markedet, og at hver aktør (PT) sin horisontale tilbudskrurve (marginalkostnad ved å tilby tjenesten) dermed sortereres på nytt i stigende rekkefølge. Da det er flere aktrøer i markedet med samme marginalkostnad, vil vi få et positivt skifte i tilbudskurven, men nå med en ny helning. 
+
+Når tilbudskurven skifter, får vi en ny likevekt $L2$, der vi har et høyere tilbuds og konsumert kvantum, til en lavere pris enn i det opprinnlige tilfellet. Da tilbudskurven får en slakere helning, vil tilbudt kvantum øke mer enn det som hadde vært tilfellet dersom tilbudskurven hadde samme elastisitiet som i $T_0$
+
+```{r}
+
+#| echo: false
+#| warning: false
+
+
+T_1 <- function(x){
+  return (1*x + 6)
+  
+  
+}
+
+T_2 <-  function(x){
+  return (2*x + 12)
+  
+}
+E <- function(x){
+  return(-2*x+20)
+}
+data <- tibble(x = seq(1,7,1), T_Etter = T_1(x), T_For = T_2(x))|>
+  pivot_longer(cols = - x,
+               names_prefix = "T_",
+               names_to = "Tid",
+               values_to = "tilbud"
+               )|>
+  ggplot()+
+  geom_line(aes(x = x , y = tilbud, color = Tid) )+ 
+   geom_line(aes(x = x, y = E(x))) + 
+  labs(x = "Etterspurt kvantum" ,y= "Pris pa varen", title = "Flere aktorer i markedet") +
+  geom_point(aes(x = 2, y = T_2(2)))+ 
+  geom_label(aes(x = 2, y = T_2(2), label = "L1"))+
+  geom_point(aes(x = 4.4, y = T_1(4.4)))+ 
+  geom_label(aes(x = 4.4, y = T_1(4.4), label = "L2"))
+  
+ 
+
+
+data
+
+
+```
+
+c) Dersom timeleien øker for lokalene PT-ene bruker, kan vi anse dette som en fast utgift $t$ som legges på alle tilbyderene av et gode. Derfor kan vi bruke den samme teorien som vi bruker dersom en stykkskatt pålegges alle produsenetene i et marked. Vi får da et paralelt skifte i tilbudskurven, slik at prisen øker. Vi får samme mekanisme som beskrevet i *oppgave a*, med at den økte timeleien deles mellom PT-ene og kondumentene. Grunnet nettoprisen til produsentnee $P_{produksjon} + t$ er høyere enn $P_0$, vil bare de aktørene som har $P_{produksjon} + t$ < $P_1$ ha lønnsom produksjon. Dermed blir tilbudet lavere, og prisen presses opp (betalingsviljen øker med et lavere tilbudt kvantum). Som i oppgave a vil delingen av hvem som betaler avgiften avhenge av elastisiteten til kurvene. 
+
+
+```{r}
+
+#| echo: false
+#| warning: false
+
+
+T_1 <- function(x){
+  return (2*x + 6)
+  
+  
+}
+
+T_2 <-  function(x){
+  return (2*x + 12)
+  
+}
+E <- function(x){
+  return(-2*x+20)
+}
+data <- tibble(x = seq(1,7,1), T_For = T_1(x), T_Etter = T_2(x))|>
+  pivot_longer(cols = - x,
+               names_prefix = "T_",
+               names_to = "Tid",
+               values_to = "tilbud"
+               )|>
+  ggplot()+
+  geom_line(aes(x = x , y = tilbud, color = Tid) )+ 
+   geom_line(aes(x = x, y = E(x))) + 
+  labs(x = "Etterspurt kvantum" ,y= "Pris pa varen", title = "Okt leie") +
+  geom_point(aes(x = 2, y = T_2(2)))+ 
+  geom_label(aes(x = 2, y = T_2(2), label = "L2"))+
+  geom_point(aes(x = 3.5, y = T_1(3.5)))+ 
+  geom_label(aes(x = 3.5, y = T_1(3.5), label = "L1"))
+  
+ 
+
+
+data
+
+
+```
+d) Noen forelsår å subsidiere PT-tjenestene, der vi betaler ut en subside $s$ til alle PT-ene. Dette vil gjøre at tilbudet flytter seg parallelt oppover i diagrammet, og vil gjøre at tilbudet av PT-tjenester vil øke. 
+
+En subsidie gir et sammfunnsøkonomisk effektivitetstap, da den flytter markedsprisen vekk fra markedslikevekten. Markedslikevekten er punktet der alle parato-effektive transaksjoner gjennomføres, alstå alle transasksjoner der $betalingsvilje > reservasjonspris$. Ved innføringen av en subside, vil marginalkostnaden ved en PT-time være $P_{marginal} = P_{markedspris}-s$. Dette gjør at flere PT-ere anser det som lønnsomt å starte opp virksomheten, enn det som hadde vært tilfelle dersom $P_{marginal} = P_{markedspris}$. $betalingsvilje < marginalkostnad$ vil da gjennomføres, da makredet "lures" til å ha en lavere pris enn det de egentlig skal ha. Dette arealet kalles *dødvektstapet*, altså produksjon som i utgangspunktet ikke er lønnsomt. 
+
+I tillegg må subsidien finansieres. dersom den finansieres gjennom skatter, kan dette føre til ytterligere effektivitetstap fordi skattene kan påvirke insentivene til å arbeide, spare eller investere. Det samlede samfunnsøkonomiske effektivitetstapet kan derfor være større enn dødvektstapet som oppstår direkte i markedet som subsidieres. 
+
+e) Antar nå at etterspurt mengde er gitt ved $x = -p + 1800$ og tilbudt mngde er ved $x = 3*p - 1800$. For å finne likevekstprisen, setter vi disse likningene lik hverandre, og løser med hensyn på pris. dette gir $$ -p + 1800 = 3*p - 1800 \Leftarrow p = 900, x = 900$$ . 
+
+
+```{r}
+
+#| echo: false
+#| warning: false
+
+
+
+
+
+Tilbud <-  function(x){
+  return (3*x - 1800)
+  
+}
+E <- function(x){
+  return(-x + 1800)
+}
+data <- tibble(x = seq(600,1200,1), Tilbud = Tilbud(x), E = E(x))|>
+  ggplot()+
+  geom_line(aes(x =  x, y = E, color = "Ettersporsel") ) + 
+  geom_line(aes(x = x , y = Tilbud, color = "Tilbud")) + 
+  labs( x = "Kvantum", y = "Pris", color = "Kurve")
+
+
+data
+
+
+```
+
+Vi ser av figuren at vi har en elastisk etterspøselskurve (prissensitiv), og en uelastisk tilbudskurve (lite prissensitiv). Dersom vi innfører en subsidie på $s = 100$ per PT-time, vil nettoprisen til PTene være $P_{netto} = P_{marked} - 100$. Dette gir likningene $$ -p + 1800 = 3*(p+100) - 1800 \Leftarrow p = 825, x = 975$$ . Vi ser at markedsprisen blir lavere, og at vi får et høyere tilbudt kvantum enn vi hadde før subsidien. 
+
+Det siste vi skal finne ut, er hovrdan subsidien deles mellom tilbyder og etterspørrer. Konsumentenes andel av subsidien vil være $P_0 - P_1$, mens tilbyderens andel av subsidien vil være $P_1 - t$, og vi har da at total lønnsomhet vil være $K_{andel} + T_{andel} = (P_0 - P_1) +  (P_1 - t) = - t$, altså at total reduksjon i prisen er $t$. 
+
+Dersom vi setter dette inn i liknigene får vi $$ - p + 1800 = 3*(p - s) - 1800 \Leftarrow 4p = 1800 - 3s \Leftarrow P_1 = P_0 - \frac{3}{4} * s$$
+
+Vi har at konsumentene får $P_0 - P_1 = P_0 - (P_0 - \frac{3}{4} * s) = \frac{3}{4} * s$, mens tilbyderne får $\frac{1}{4} * s $ . Av dette ser vi at den uelatiske etterspøselen gjør at konsumentene får den største andelen av  subsidien. 
+
+

@@ -1,0 +1,76 @@
+---
+title: "Working with data"
+date: "23-09-2026"
+
+format: docx
+---
+
+## Lagring av data på maskinen
+Data på en maskin er lagret i det binære tallsystemet, der det er skrevet som linjærkombinasjoner av potenser av 2. 
+
+### Data import: one funciton per format
+
+Målet er å importere dataen som en tibble.
+
+```{r}
+
+#seperated text
+```
+
+
+### Tekstfiler
+Dette er filer som er skrevet med et brukergrensersnitt, slik at vi forstår hva som står der. 
+- **csv,txt,tsv**
+  
+- Kolonenne er separert med **,**, **;** eller **""**
+  - read_csv, read_tsv, read_table
+  
+- **read_csv("imports.csv",skip = 2)**
+  - Leser kommaseparerte filer **,**
+  - list.files()
+    - finner matchene filer i en mappe
+
+# Lese APIer
+```{r}
+
+library(tidyverse)
+library(httr2)
+library(rvest)
+library(janitor)
+
+
+#Oslo
+latitude <- 59.91
+longitude <- 10.76
+
+weather_request <- request("https://archive-api.open-meteo.com/v1/archive")|>
+  req_url_query(
+    latitude = latitude,
+    longitude = longitude, 
+    daily = "temperature_2m_max,temperature_2m_min",
+    start_date = Sys.Date() - 14,
+    end_date = Sys.Date(),
+    timezone = "Europe/Oslo")
+
+weather <- weather_request |>
+  req_perform() |>
+  resp_body_json()
+
+weather_data <- tibble(
+  date = as.Date(unlist((weather$daily$time))), #det er lagret i nestede lister
+  max_temp =unlist( weather$daily$temperature_2m_max),
+  min_temp = unlist(weather$daily$temperature_2m_min)
+)
+
+weather_data
+```
+  
+
+
+### Dato og tid
+
+Standard måte å notere datoer på, er **YYYY-MM-DD**. 
+### Binære og "foreign files" 
+Datasett som er skrevet i binær tallkode, samt andre filer som ikke er skrevet i et brukergrensersnitt.
+
+### Kombinere datasett

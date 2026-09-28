@@ -11,12 +11,16 @@ Vi skal løse eksamensoppgaven fra 2023, der oppgaven er å se på valuttakursen
 Det første vi gjør er å imporere datasettet som en tibble, før vi plotter det som et tidsserieplott, for å se utvikligen over tid. 
 
 ```{r}
-
+#| echo: false
 #| output: false
+#| warning: false
+
+
 
 
 library(tidyverse)
 library(readxl)
+set_theme(theme_bw())
 
 
 ```
@@ -24,10 +28,8 @@ library(readxl)
 ```{r}
 
 
-
 theme_set(theme_bw()) #setter temaet som sort-hvitt globalt
-euro <- read_csv("euro.csv")  #dette er relevante variabler for senere, så vi plassere det i modertibbelen
-
+euro <- read_csv("euro.csv")  
 tidsserie <- euro |>
   ggplot(aes(x = t, y = rate)) + 
   geom_line() +
@@ -43,8 +45,9 @@ Det neste vi skal gjøre, er å lage en liste over gjennomsnittlig kronekurs per
 ```{r}
 
 monthly <- euro |>
-  mutate(month = month(t), year = year(t))|>
-  summarise(kurs = mean(rate),.by = c(month, year))
+  filter(year(t) == 2022)|>
+  mutate(month = month(t))|>
+  summarise(kurs = mean(rate), .by = c(month))
 
 
 print(monthly)
@@ -52,29 +55,40 @@ print(monthly)
 ```
 
 
-#Oppgave c)
+# Oppgave c)
 
 Nå skal vi finne den dagen som har henholdsvis høyest og lavest kurs per år, i løpet av årene 2014 til 2022. 
 
 ```{r}
 
-hoy_lav <- euro |>
-  mutate(month = month(t), year = year(t))|>
-  summarise(hoyest = max(rate), lavest = min(rate), .by = year)|>
-  filter(between(year,2014,2022))
+lavest <- euro |>
+  mutate(year = year(t))|>
+  slice_min(rate, by = year)|>
+  rename(min_rate = rate, date_min = t)
+hoyest <- euro |>
+  mutate(year = year(t))|>
+  slice_max(rate, by = year)|>
+  rename(max_rate = rate, date_max = t)
+
+hoyest
+lavest <- lavest |>
+  left_join(hoyest)|>
+  select(year,everything())
+
+lavest
 
 
-print(hoy_lav)
-  
+
 ```
-#Oppgave d
+# Oppgave d
 Vi skal nå importere datasettet over styringsrenten, for å se om kronekursen og styringsrenten er korrelert. 
 
 
 ```{r}
 
 nb_rates <- read_excel("nb_rates.xlsx") |>
-  rename(t = date)#bytter navn på kolonnen, slik at euro og kronekursen kan slås sammen
+  mutate(t = as.Date(date))|>#bytter navn på kolonnen, slik at euro og kronekursen kan slås sammen
+  arrange(t)
 
 nb_plot <- nb_rates |>
   ggplot(aes(x = t, y = policy_rate)) +
@@ -87,47 +101,88 @@ nb_plot
 #oppgave e
 Vi skal nå se på sammenhengen mellom kronekursen og styringsrenten. Dette gjør vi ved å lage en linjær regresjonsmodel, med styringsrenten som forklaringsvariabel. 
 
+I samfunnsøkonomi lærer man at en høyere styringsrente styrker kronen, da det vil øke etterspøselen etter norske kroner. Slik sett vil en høy styringsrente være korelert med en lav kronekurs, alså at vi må betale få NOK for en euro. På en annen side vil en svak kronekurs føre til at sentralbanken øker styringsrenten. Det tar noe tid før dette treffer inn i økonomien, slik at en høy styringsrente og høy kronekurs også vil sameksistere. Derfor får vi to ulike estimater for $\hat{b}$ dersom vi gjør regresjonen med verdier fra 2014-2022 og fra 2022 - 2024. 
+
 ```{r}
 
 
 euro_med_styring <- euro |>
   left_join(nb_rates)|>
-  fill(policy_rate, .direction = "down") |>#fyller datasettet nedover med observert data
+  fill(policy_rate)|>
   rename(kronekurs = rate, styringsrente = policy_rate)
 
 
+data_2014_2022 <- euro_med_styring |>
+  filter(year(t) %in% 2014:2022)
 
-kor <- euro_med_styring |>
-  ggplot(aes(x = kronekurs, y = styringsrente)) + 
-  geom_smooth() + 
-  labs(title = "kronekurs mot styringsrente")
+model_2014_2022 <- (lm(kronekurs~styringsrente,data_2014_2022))
+
+summary(model_2014_2022)
+
+```
+```{r}
 
 
-kor
+euro_med_styring <- euro |>
+  left_join(nb_rates)|>
+  fill(policy_rate)|>
+  rename(kronekurs = rate, styringsrente = policy_rate)
 
-model <- lm(euro_med_styring$kronekurs ~ euro_med_styring$styringsrente)
-summary(model)
+
+model_2022_2025 <- euro_med_styring |>
+  filter(year(t) %in% 2022:2025)
+
+summary(lm(kronekurs~styringsrente,model_2022_2025))
+
 
 
 ```
-Av plottet ser vi at det er en positiv korrelasjon mellom styringsrenten og kronekurs, altså at en høyere styringsrente gir en sterkere krone mot euroen. Dog er $R^2$ bare på 0.1049, som vil si at korrelasjonen mellom avvikene fra forveningsverdien for de observerte verdiene og avvikene fra forveningsverdien for de predikerte verdiene er lav. 
+
+Vi ser at kronekurs og styringsrente er negativt korrelert i årene frem til 2022, mens de er positivt korrelert i årene etter. Dette stemmer godt med rentepolitkken til Norges bank, da de hever styringsrenten for å få bukt med den høye kronekursen. Norges bank støtter seg altså på littarturen om at en høyere styringsrente gir en lavere kronekurs, men modellen vår svikter, grunnet kausaliteten til variablene.
+
+
 
 ## Testing av modellen
-
-## QQ-plot
-Vi har nå antatt en linjær regresjonsmodell, altså at vi kan skrive $E(Y|x) = \hat{b} x + \epsilon $, der vi har at $\epsilon = N(0,\sigma^2)$. Vi tester lineariteten ved å konsturere et qq-plot, der vi ordner $\epsilon$ i stigende rekkefølge, og sammenligner disse kvantilene med kvantilene fra normalfordelingen. 
+Da jeg har et bankene statistikkhjerte, skjekker jeg modellantagelsene for den linjære modellen vi har konstruert for sammenhengen mellom kronekursen og styringsrenten. 
+### Konstant varians
 ```{r}
 #| input: false
-plot(model, which = 2)
+plot(model_2014_2022, which = 1)
 ```
+Det første vi vil teste er om  $\epsilon = N(0,\sigma^2)$ er normalfordelt, altså at den er uavhening av den predikerte verdien ($E(Y|x)$). Av plottet ser vi at reusidalene synker når den predikerte verdien øker, men at reusidalene er tilfeldige når den predikerte kronekursen er større enn 9.2. For lave predikerte verdier av styringsrenten ser vi altså at modellen konstant overestimerer den sanne verdien. 
+
+### QQ-plot
+```{r}
+#| input: false
+plot(model_2014_2022, which = 2)
+```
+Vi har nå antatt en linjær regresjonsmodell, altså at vi kan skrive $E(Y|x) = \hat{b} x + \epsilon $, der vi har at $\epsilon = N(0,\sigma^2)$. Vi tester lineariteten ved å konsturere et qq-plot, der vi ordner $\epsilon$ i stigende rekkefølge, og sammenligner disse kvantilene med kvantilene fra normalfordelingen. 
+
 Vi ser at modellen i stor grad passer med linjen, slik at antagelsen om lineraitet er oppfylt. 
 
-### Hmoskedastisitet
-Det andre vi vil teste, er om  *homoskedastisitet*. 
-
+### Homoskedastisitet
 ```{r}
 #| input: false
-plot(model, which = 3)
+plot(model_2014_2022, which = 3)
 ```
 
-Vi ser at de standariserte reusidalene i stor grad holdes konstante, slik at modellen kan antas å være homoedastisk.
+Vi ser at de standardiserte reusidalene avtar når de predikerte verdiene øker, altså at variansen ikke holdes konstant. Dette stemmer godt det første reusidalplottet, som viser at modellen overestimerer lave verdier av kronekursen. 
+
+
+## API
+
+Et API er en måte å lagre data på, uten at det er formidlet gjennom et brukergrensesnitt. Da dette er enorme datasett, må vi begrense oss på hvilke variabler vi importerer inn for å jobbe med. Dette skriver vi inn i forespøselen til APIet. Hver gang vi kjører forespøselen i et API, henter den ut det oppdatererte datasettet. 
+
+
+```{r}
+
+link <- "https://data.norges-bank.no/api/data/EXR/B.EUR+USD.NOK.SP?format=csv&startPeriod=2020-01-02&endPeriod=2022-12-31&locale=en&bom=include"
+
+nb <- read_delim(link, delim = ";") #filen er separert med ;
+View(nb)
+nb <- nb |>
+  mutate(tid = TIME_PERIOD)
+
+request(link) |>
+  req_perform()
+```

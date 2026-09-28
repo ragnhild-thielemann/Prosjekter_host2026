@@ -1,11 +1,26 @@
 ---
-title: "co2"
+title: "Drøfting av co2-utslipp"
+
+author:
+  - name: Ragnhild Thielemann
+
+date: today
+date-format: D MMMM YYYY
+abstract: |
+  I dette paperet undersøker vi co2-utslipp fra 1750 og frem til i dag. Vi ønsker å undersøke hvordan utslippene har utviklet seg i ulike land, for å forstå konflikten rundt tap- og skadefondet fra klimatoppmøtene. Jeg har tatt med R-koden, slik at beregningene er enkle å følge. 
 format: docx
+number-sections: true
+lang: nb # Uncomment if writing in Norwegian (gives "Figur", "Tabell")
+
+execute:
+
+  warning: false
+  message: false
 ---
 
 
-
 Det første vi gjør, er å imporere de bibliotekene vi trenger for å løse oppgaven, samt gjøre datasettet vårt enkelt å håndtere for vidre jobbing.
+## Imporering av data
 ```{r}
 #| echo: false 
 #| output: false
@@ -13,6 +28,8 @@ Det første vi gjør, er å imporere de bibliotekene vi trenger for å løse opp
 library(tidyverse)
 library(readxl) 
 library(scales) 
+library(countrycode)
+library(sf)
 library(janitor)
 
 theme_set(theme_bw()) #velger tema for plottene, slik at de ser pene ut
@@ -24,37 +41,36 @@ co2 <- readxl::read_excel("co2.xlsx") |>#imporerer datasettet vi trenger
 
 ```
 
-### USA og Kinas kummulative utslipp
+## USA og Kinas kummulative utslipp
 
 Det første vi gjør, er å se på USA og Kinas kummulative utslipp fra 1800 og frem til i dag. Vi ser at Kina ikke begynner å slippe ut co2 før i 1900, og har relativt marginale utslipp frem til 1950, før kulturrevulusjonen treffer og Kinas økonomiske vekst starter. Innen 1950 har USA fått i gang mye industri, og har derfor sluppet ut store mengder co2 i atmosfæren. Dermed blir USAs kummulative utslipp liggende langt over Kinas kummulative utslipp. 
 
 ```{r}
 
 p1 <- co2|>
-  filter(code == c("USA","CHN")) |>
+  filter(code %in% c("USA","CHN")) |>
   ggplot(aes(year, co2, color = entity)) + 
   geom_line() + 
   scale_y_continuous(labels = label_comma (scale = 1e-9)) + #endrer aksene våre, og deler aksene (som er kontinuelig) til verdi i milliarder tonn. Dette opplyser vi om når vi lager aksetidlene
-  labs(x = "Year", y = "Co2 i milliarder tonn", color = "Land")
+  labs(x = "Year", y = "Co2 i milliarder tonn", color = "Land", title = "Kummulative utslipp")
 
 p1
 
 ```
 
-I debatten om klimakutt blir Kina dog anklaget for å ha hatt en enorm vekst i klimagassutslipp. Derfor lager vi et plott som viser økningen i klimagassutslippp. 
-
+I debatten om klimakutt blir Kina dog anklaget for å ha hatt en enorm vekst i klimagassutslipp. Derfor lager vi et plott som viser endringen i klimagassutslippp i henholdsvis USA og Kina. 
 
 ```{r}
 
 p2 <- co2 |>
   arrange(code,year) |> #sorterer først på landkode, og så på år
   mutate(increase = (co2-lag(co2)),.by = code)|>
-  filter(code ==c("USA","CHN")) |>
+  filter(code  %in% c("USA","CHN")) |>
   filter(between(year,1900,2500))|>
-  ggplot(aes(x = year, y = increase, color = entity)) + 
+  ggplot( aes(x = year, y = increase, color = entity)) + 
   geom_line() +
   scale_y_continuous(labels = label_comma (scale = 1e-9)) + 
-  labs(x = "Year", y = "co2 i (milliarder tonn)", title = "Okning i co2", color = "Land")
+  labs(x = "year", y = "co2 i (milliarder tonn)", title = "Okning i co2", color = "Land")
   
   
   
@@ -62,6 +78,12 @@ p2 <- co2 |>
 p2
   
 ```
+Vi ser at når vi regner økning i utslipp, så har Kina ligget over USA siden år 2000. På klimatoppmøtene er dette et tilbakevendene problem - vesten står for de store kummulative utslippene, men har gått gjennom en industriallisering. Mange fattigere land har ikke bygd opp infrastruktur, og denne oppbyggingen vil kreve en utslippsøkning. Økningen i utslippene i utviklingsland brukes som argument fra de vestlige landene til å holde igjen på kravene for utslippskutt. 
+
+På klimatoppmøtene er betaling for historiske utslipp et tilbakevendene tema. Fattigere land blir rammet hardest av klimaendringene, grunnet dårlig infrastruktur for å håndtere ekstremvær, samt beliggenhet som gjør dem mer utsatt. På klimatoppmøtet i 2025 var *tap- og skadefondet* en verkebyll, der utviklingslandenes ønske om et skadefond på 1300 milliarder ble forhandlet ned til 300 milliarder. 
+
+## Andel av verdens årlige utslipp
+
 
 
 ```{r}
@@ -92,31 +114,98 @@ global <- co2 |>
   ggplot(aes(x = year, y = Utslipp, color = Land)) + 
   geom_line() +
   scale_y_continuous(labels = label_comma(scale = 1e2)) +
-  labs(y = "Utslipp (i prosent)", title = "Andel av  verdens totale utslipp")
+  labs(y = "Utslipp (i prosent)", title = "Arlige utslipp fordelt på kontinenter")
 
 global
 
 ```
 
+Vi ser nå på andelen de to landene har av verdens årlige utslipp. Av plottet ser vi at USA ligger over Kina, som vil si at USAs andel av utslippene holder seg større enn Kinas ande. 
+
+## Fordeling av utslippene mellom kontinenter
+
 
 ```{r}
 
-library(countrycode)
-library(sf)
+
 kontinent <- co2 |>
-  mutate(Kontinent = countrycode(code, 
+  filter(year>1850)|>
+  mutate(kontinent = countrycode(code, 
                                  "iso3c",
                                  "continent"))|>
-  group_by(Kontinent, year) |>
+  group_by(kontinent, year) |>
   summarise(total = sum(co2))|>
   ungroup() |>
-  ggplot(aes(x = year, y = total, stat = Kontinent, fill = Kontinent)) +
+  ggplot(aes(x = year, y = total, stat = kontinent, fill = kontinent)) +
   geom_area() +
   scale_y_continuous(label = label_comma(scale = 1e-9))+
-  labs(x= "Year", y = "Totale utslipp (milliarder tonn co2)", title = "Kummulerte utslipp fordelt på kontinenter")
+  labs(x= "Year", y = "Totale utslipp (milliarder tonn co2)", title = "Kummulerte utslipp fordelt pa kontinenter")
 
 kontinent
          
 
 ```
 
+Når vi ser de årlige utslippene, fordelt på kontinenter, ser vi at Europa og Amerika står for kjøttvekta av de årlige utslippene, selv etter den asiatiske tigern.   
+
+## Kart som beskriver utslippene
+
+```{r}
+library(rnaturalearth)
+
+world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf") |>
+  janitor::clean_names() |> #fjerner store bokstaver, samt fjerner mellomrom
+  filter(admin != "Antarctica") 
+
+world_code <- world |>
+  select(iso_a3)
+
+```
+
+```{r}
+
+co2_total <- co2 |>
+  summarise(total_co2 = sum(co2,na.rm = TRUE), .by = code)
+
+verdenskart <- world_code |>
+  left_join(co2_total, by = join_by( iso_a3 == code))|>
+  drop_na()|>
+  ggplot() +
+  geom_sf(aes(fill = total_co2)) +
+  scale_fill_continuous(label = label_comma(scale = 1e-9)) + 
+  labs(title = "Totale utslipp i milliarder tonn CO2", fill = "Totale utslipp")
+ 
+
+
+(verdenskart)
+
+
+
+```
+
+Det er også intresant å se på utslippene i 2020, basert på antall inbyggere, altså utslipp per capita. Dette gjøres ved å finne utslippene i 2020, og dele på antall inbyggere i landet ved det gitte tidspunktet. 
+
+```{r}
+library(rnaturalearth)
+View(co2)
+co2_2020 <- co2 |>
+  filter(year %in% 2015)|>
+  mutate(kontinent = countrycode(code,
+                                "iso3c",
+                                "continent"))
+
+world_pop <- world |>
+  dplyr::select(pop_est, iso_a3)|>
+  
+  left_join(co2_2020, by = join_by(iso_a3 == code))|>
+  filter(kontinent == "Asia")|>
+  mutate(utslipp_per_inbygger = co2/pop_est)|>
+  ggplot() +
+  geom_sf(aes(fill = utslipp_per_inbygger)) +
+  scale_fill_continuous(label = label_comma(scale = 1e-0)) + labs(fill = "Tonn co2 per inbygger", title = "Utslipp per inbygger i Asia" )
+
+
+
+world_pop
+
+```

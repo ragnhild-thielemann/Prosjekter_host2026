@@ -1,0 +1,171 @@
+---
+title: "ideer"
+format: docx
+---
+# CHATLOGGEN forklaring av kraftdata
+# Data for Norge er også i dette datasettet
+
+# Bruke MCP
+Github og copilot
+
+https://energidataservice.dk/tso-electricity/DayAheadPrices?fbclid=IwY2xjawUg6A1wZG9mAWV4dG4DYWVtAjEwAGJyaWQRMGhLMUp5Vk5SdWZGbjFFdWtzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEekM62ke8i1AXtQahz5JsMNH_6e2a0AayPY6Umb_itVcpfbMPRUchkT_CGPGY_aem_ZBdhWu6KdloFu8KXugH1lQ
+
+
+Strømpris: NordAPI/Allemannsdata/ENTSO-E
+Magasinfylling: NVE
+Produksjon: Statnett/ENTSO-E
+Eksport: Statnett/ENTSO-E
+
+https://allemannsdata.com/ 
+
+HER ER ALT VI TRENGER 
+```{r}
+
+#hente inn som en API, da norpol er en betalt tjeneste
+library(httr2)
+library(tidyverse)
+
+url <- "https://allemannsdata.com/wiki/api/v1/kilder/entsoe/get_day_ahead_prices"
+
+data <- request(url) |>
+  req_url_query(
+    zone_code = "NO1",
+    start = "2020-01-01",
+    end = "2020-12-31",
+    limit = 100
+  ) |>
+  req_perform() |>
+  resp_body_json()
+
+
+```
+Historiske data = se på hvordan prisen varierer med vær og vind
+Ting å undersøke:
+
+Vi er først og fremst avhenign av stabile strømpriser. 
+1. Fyllingsgrad mot stabile strømpriser
+  -**Er strømprisene mer stabile når vannmagasinene er fullere i november?**
+  - Er prisen mer stabil når vannmagasinene er fullere i Novemeber?
+  - Justerer vannmagasinene seg etter prisen i Europa? På om de tjener på eksport? 
+    - Pålagt å holde igjen
+
+2. Før og etter vi kobla oss på Europa
+  - Sol og vind, dette er ting som er avgjørende i Europa.
+  - Prissmitte. Når er prisen i europa en forklaringsvariabel for norsk strømpris?
+    - T.tester av variablene
+
+sammenheng mellom strømpris og vind i europa
+
+Blåste lite i tyskland 
+Sharpio-ratio.
+Ulike klimascenarioer = mer vann og mindre snø
+Ønsker at det ikke varier med kraften
+
+Ulike værmeldinger påvirker prisen ulikt, da vi har ulike prissoner
+
+
+Hvordan varierer strømprisen med temperatur?
+
+Hvordan varierer strømprisen med nedbør?
+
+Er sammenhengen forskjellig mellom NO1 og NO4?
+
+Er strømprisene mer volatile i noen prisområder?
+  - Hvordan strømprisene endrer seg etter tilbudet
+  - Hvor stort standardavvik er det? 
+  - Øker ved lite vann i magasinene
+    - Større variasjon når det er lite vann i magasinene
+      - DET ER VANN I MAGASINENE
+  
+  Når kapasiteten i nettet har økt, gjør dette prisen mer stabil
+
+
+prisen i noen soner er en funksjon av  prisen i europa
+
+  - prissmitte mellom ulike skoner
+  - Korrelasjon mellom ulike prissoner - Dette er ønskelig
+### strømutgiftene i prosent har eksplodert
+### Norge som europas batteri
+- Stille spørsmål om vi kan justere behovet
+
+### batterifabrikker - Hvor mye strøm tar de faktisk
+
+
+### Kater vi strøm på havet
+
+Strømprisen endrer seg med nye kraftkabler
+
+gjør generatorene mer effektive
+  - sammenligne estimert strømproduksjon fra lite og store faktoer
+  
+
+Hvor mye som produserers i de ulike kraftkildene
+https://www.statnett.no/for-aktorer-i-kraftbransjen/tall-og-data-fra-kraftsystemet/?fbclid=IwY2xjawUg3SxwZG9mAWV4dG4DYWVtAjEwAGJyaWQRMGhLMUp5Vk5SdWZGbjFFdWtzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEecB2SkDQg-s6viIqO0HbyhvVclfWMfNqJtu-xCMEJKuVJ6HRYMFrNm_g7GGM_aem_LlNDT4PuXkewblZr78stXA#nordisk-kraftbalanse
+
+
+# Statnett sitt API 
+https://driftsdata.statnett.no/restapi/?utm_source=chatgpt.com
+
+
+
+
+
+
+### Hva landene produserer og eksporterer 
+https://www.statnett.no/for-aktorer-i-kraftbransjen/tall-og-data-fra-kraftsystemet/?fbclid=IwY2xjawUg3SxwZG9mAWV4dG4DYWVtAjEwAGJyaWQRMGhLMUp5Vk5SdWZGbjFFdWtzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEecB2SkDQg-s6viIqO0HbyhvVclfWMfNqJtu-xCMEJKuVJ6HRYMFrNm_g7GGM_aem_LlNDT4PuXkewblZr78stXA#nordisk-kraftbalanse
+
+
+### sammenligne produsert kraft og strømprisen
+
+
+
+Jeg ville faktisk laget prosjektet rundt 3 spørsmål
+A. Fyllingsgrad og prisvolatilitet
+
+Har høyere magasinfylling ved inngangen til tappesesongen sammenheng med lavere strømprisvolatilitet gjennom vinteren?
+
+Data:
+
+NVE: magasinfylling
+Nord Pool: strømpris
+eventuelt temperatur/vind/nedbør som kontrollvariabler
+B. Europeiske priser og norsk vannkraft
+
+Hvordan henger europeiske kraftpriser sammen med norsk vannkraftproduksjon og magasintapping?
+
+Her kan du lage:
+
+$$ \Delta Magasin_t = \beta_0+ \beta_1 P_{Europa,t} +\beta_2 P_{Norge,t} +\beta_3 T_t +\epsilon_t $$
+
+Men du må være forsiktig med årsakstolkningen, siden europeiske og norske priser påvirker hverandre gjennom kraftflyten. Statnett beskriver nettopp hvordan strøm flyter fra områder med lavere til områder med høyere pris, gitt tilgjengelig overføringskapasitet.
+
+C. Eksport og vannverdi
+
+Dette synes jeg er en veldig fin økonomisk problemstilling:
+
+Når europeiske strømpriser er høye relativt til norske priser, øker norsk krafteksport – og hvordan påvirker dette vannmagasinene?
+
+Da kan du se på:
+
+$$ P_{Europa,t}-P_{Norge,t} $$
+
+mot
+
+$$ Eksport_t $$
+
+og eventuelt:
+
+$$ P_{Europa,t}-P_{Norge,t} $$
+
+mot
+
+$$ \Delta Magasin_t $$
+
+Statnett rapporterer faktisk at Norge eksporterte 34,3 TWh og importerte 11,3 TWh i 2025, og at magasinfylling er en sentral indikator for kraftressurssituasjonen og påvirker kraftprisene.
+
+Dette gir deg en ganske fin kombinasjon av statistikk + økonomi + kraftsystem + programmering. Og det kan gjøres med data som faktisk kan hentes inn i R.
+
+# Hvordan de utnytter kapasiteten - koble dette mot værmeldingen - få tilgang til en API
+https://transparency.entsoe.eu/generation/actual/perType/generation?appState=%7B%22sa%22%3A%5B%22BZN%7C10Y1001A1001A45N%22%5D%2C%22st%22%3A%22BZN%22%2C%22mm%22%3Atrue%2C%22ma%22%3Afalse%2C%22sp%22%3A%22HALF%22%2C%22dt%22%3A%22CHART%22%2C%22df%22%3A%5B%222026-09-17%22%2C%222026-09-23%22%5D%2C%22tz%22%3A%22CET%22%2C%22ii%22%3Anull%2C%22ps%22%3Anull%7D&fbclid=IwY2xjawUg5U5wZG9mAWV4dG4DYWVtAjEwAGJyaWQRMGhLMUp5Vk5SdWZGbjFFdWtzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEe2NkwZ2fziu7-oLXCQ1duR7NDYLUaq64A8PStGph5tms8qJlNqFfy93A1p-E_aem_QaUSl9Vg_iwZW4UlRQLhag 
+
+
