@@ -211,12 +211,24 @@ Av utskriften ser vi at det er en negativ korrelasjonsfaktor på $-4.487$, med e
 library(tidyverse)
 library(httr2)
 library(rvest)
-library(janitor)
+library(jsonlite)
+
+hour_data <- NULL
+
+for (d in 1:7){
+  link <- paste("https://www.hvakosterstrommen.no/api/v1/prices/2024/01-0",d,"_NO1.json", sep = "") #paster uten mellomrom
+  
+  hour_data <- bind_rows(hour_data,fromJSON(link))
+  }
 
 
+p1 <- hour_data |>
+  mutate(time_start = ymd_hms(time_start))|>
+  ggplot(aes(x = time_start, y = EUR_per_kWh)) + 
+  geom_line() + 
+  labs(x = "tid", y = "euro per kWh", title = "pris pa strom")
 
-weather_request <- request("https://www.hvakosterstrommen.no/api/v1/prices/2024/01-02_NO1.json")
+p1
 
-
-View(weather_request)
+```
 
