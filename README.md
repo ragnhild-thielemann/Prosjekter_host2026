@@ -7,3 +7,6 @@ Jeg har valgt å legge prosjektarbeidet mitt i Word-filer, slik at det blir enkl
 
 
 [Utvikling av kronekurs](https://github.com/ragnhild-thielemann/Prosjekter_host2026/blob/main/Prosjekter/Valuttakurs/Valutakurs_eksamen2023.docx)
+
+
+[Drøfting av  verdens co2-utslipp](https://github.com/ragnhild-thielemann/Prosjekter_host2026/blob/main/Seminarer/Seminar_4/co2.docx)
