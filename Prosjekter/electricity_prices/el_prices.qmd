@@ -1,0 +1,222 @@
+---
+title: "Analyse av elektrisitetsprisene"
+
+author:
+  - name: Ragnhild Thielemann
+
+date: today
+date-format: D MMMM YYYY
+
+format: docx
+number-sections: true
+lang: nb # Uncomment if writing in Norwegian (gives "Figur", "Tabell")
+
+execute:
+
+  warning: false
+  message: false
+---
+
+
+```{r}
+#| echo: false
+#| output: false
+
+
+library(tidyverse)
+library(janitor)
+
+library(readxl)
+
+set_theme(theme_bw())
+```
+
+Det første vi gjør, er å hente ut datasettet for desember, og filterer ut de kolonnene som beskriver prissonene i Norge. 
+```{r}
+
+
+el_prices <- read_excel("ElPrices.xlsx", sheet = "December") |>
+  dplyr::select(date,starts_with("no")) #sorterer ut alle kolonnene som starter med "no"
+
+```
+
+### Tidsserieplott for NO1
+
+```{r}
+
+
+no1 <- el_prices |>
+  select(date,no1) |>
+  ggplot(aes(x = date, y = no1)) + #setter aksene globalt
+  geom_line() +
+  labs(x = "tid", y = "spotpris", title = "strompris i prissone 1")
+
+no1
+
+
+```
+
+## Pris i ulike prissoner
+
+I datasettet vårt er pris responsvariabel, mens tid og prissone er faktorer. Når et datasett er på *wide format* har man flere responsvariabler per rad. I vårt tilfelle er datasettet vi importerte fra excel på et wide format, da en rad består av en dato, samt responsvariablene (prisen) for alle de fem prissonene.
+
+
+Data på *long format* er tidy data, der man har en responsvariabel per rad, altså en observasjon per rad. Kolonenene er de ulike faktorene som bestemmer responsvariablen. Når vi jobber med dataanalyse, ønsker vi dataen på et wide format, da dette er enklere å håndtere. Når vi har transformert dataen til et *long format*, kan vi lage et plott, der vi plotter strømprisen i ulike prissoner mot hverandre. 
+
+```{r}
+
+el_prices_long <- el_prices |>
+  pivot_longer(cols = -date,
+               names_to = "prissone",
+               values_to = "pris")|>
+  janitor::clean_names() #lager pene kolonnetitler
+
+p2 <- el_prices_long |>
+  ggplot(aes(x = date, y = pris, color = prissone )) +
+  geom_line() +
+  labs(x = "tid", y = "spotpris", title = "pris i ulike prissoner")
+
+p2
+
+
+```
+## Hente ut alle sheetsene med data
+
+Dette krever en løkke med data for å hente ut alle sheetsene fra excel-filen. Vi sorterer ut kolonnene som gir oss prisen i de norske prissonene, før vi binder dem sammen til et datasett. Dette datasettet må også konstrueres på et *long format*.
+```{r}
+library(clock)
+
+x <- year_month_day(2023, 1:12)
+months <- calendar_month_factor (x)
+
+el_prices_total <- tibble()
+for (m in months){
+  el_prices_month <- read_excel("ElPrices.xlsx", sheet = m) |>
+  dplyr::select(date,starts_with("no"))
+  if(nrow(el_prices_total)== 0){
+    el_prices_total = el_prices_month
+  } else{
+    el_prices_total <- el_prices_total |>
+      bind_rows(el_prices_month)
+  }
+  
+}
+
+el_prices_total <- el_prices_total |>
+  pivot_longer(cols = -date,
+               
+               names_to = "prissone", 
+               values_to = "pris") |>
+  janitor::clean_names() |>
+  arrange(date)
+
+
+```
+
+Når vi har fått hele datasettet på et *long format* kan vi lage et plot for hele 2023. 
+
+
+```{r}
+
+p3 <- el_prices_total |>
+  ggplot(aes(x = date, y = pris, color = prissone)) +
+  geom_line() +
+  labs(title = "pris i ulike prissoner i 2023")
+
+
+p3
+```
+## Gjennomsnittlig pris per måned, gitt ukedag
+
+```{r}
+
+x <- year_month_day(2023, 1:12)
+months <- calendar_month_factor (x)
+
+month_day <- el_prices_total |>
+  filter(prissone == "no1") |>
+  mutate(month = month(date), weekday = as_weekday(date))|>
+  summarise(pris = mean(pris), .by = c(month,weekday))|>
+
+
+
+
+  pivot_wider(names_from = weekday,
+              values_from = pris)|>
+  mutate(month = months)
+
+ 
+month_day
+
+
+```
+## Høyest og lavest pris
+
+Nå skal vi finne den dagen med høyest pris i de ulike prissonene i løpet av 2023. Dette gjør vi ved å hente ut den raden som har maksimal pris, sorteret på per prissone og per måned. 
+
+```{r}
+
+hoyest <- el_prices_total |>
+  mutate(month = month(date))|>
+  slice_max(pris, by = c(prissone,month) ) |>#finner den raden med høyest pris 
+  mutate(month = date_month_factor (date))|>
+  mutate(date = ymd(date))
+  
+
+
+hoyest
+
+```
+
+## Sammenheng mellom pris og temperatur
+Vi importerer en csv-fil med temperaturene i desember, for å finne ut om det er en sammenheng mellom pris og temeraturene. Da temperaturene er fra Blindern, bruker vi datasettet over prissone 1. 
+
+
+```{r}
+
+tempeatures <- read_csv("temperatures.csv")
+
+priser_desember <- el_prices_total |>
+  filter(prissone == "no1")|>
+  filter(month(date) == 12) |>
+  mutate(date = day(date)) |>
+  arrange(date) |>
+  left_join(tempeatures, by = join_by(date == day))
+
+p3 <- priser_desember |>
+  ggplot(aes(x = temp, y = pris )) + 
+  geom_smooth() +
+  labs(x = "temperatur", y ="pris", title = "temperatur som forklaringsvariabel pa pris" )
+  
+
+p3
+```
+Av plottet ser det ut til at pris og tempeartur er negativt korrelert, alstå at når temperaturen er lav, så er prisen høy. Dette gir mening, da lave  temperaturer øker etterspørselen, som etter vanlig markedsteori (med en uelatisk tilbudskurve) gir høyere pris i markedet. Vi kan også bruke en linjær regresjonsmodel til å finne en korrelasjonskoefesient, der vi antar en linjær modell på formen $P_i = \hat{b_0} + \hat{b_1}x_i + \epsilon$, der $\hat{b_1}$ er korrelasjonskoefeisenten. 
+
+
+```{r}
+
+model <- lm(pris~temp,priser_desember )
+
+summary(model)
+
+```
+Av utskriften ser vi at det er en negativ korrelasjonsfaktor på $-4.487$, med en p-verdi på 0.1% mot nullhypotesen om at $\hat{b_1}$ ikke er signifikant. Dog er $R^2$ bare på 0.29, så bare 53% av variasjonen i responsvariabelen (pris) fanges opp av den linjære regresjonsmodellen. Allikevel kan vi konkludere med at en lavere tempeatur vil gi en høyere strømpris. 
+
+
+## Hente ut en JSON-fil
+
+```{r}
+
+library(tidyverse)
+library(httr2)
+library(rvest)
+library(janitor)
+
+
+
+weather_request <- request("https://www.hvakosterstrommen.no/api/v1/prices/2024/01-02_NO1.json")
+
+
+View(weather_request)
+
