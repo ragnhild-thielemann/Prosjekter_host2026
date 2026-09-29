@@ -1,0 +1,182 @@
+---
+title: "Helsetilbud i ulike områder"
+
+author:
+  - name: Ragnhild Thielemann
+
+date: today
+date-format: D MMMM YYYY
+
+format: docx
+lang: nb # Uncomment if writing in Norwegian (gives "Figur", "Tabell")
+
+execute:
+
+  warning: false
+  message: false
+---
+
+Denne uken skal vi se på *Global Human Settlement Urban Centre Database Produced by the Joint Research Centre (JRC) of the European Commission*, som er et datasett som viser 10,000 urbane områder over hele verden. Variablene i datasettet er *befolkningstetthet*, *størrelse på byen*, samt en konstant for *urbaniseringsgrad*. 
+
+```{r}
+#| echo: false
+#| output: false
+
+library(tidyverse)
+library(tidytuesdayR)
+library(janitor)
+```
+
+
+
+```{r}
+
+tuesdata <- tidytuesdayR::tt_load(2026, week = 39)
+health <- tuesdata$health 
+
+View(health)
+
+```
+## Analyse av  manglende verdier
+
+Når vi åpner datasettet, observerer vi at det mangler mange observasjoner. Før vi jobber vidre, finner vi ut antall manglende observasjoner per kolonne. 
+
+```{r}
+
+n_total <- nrow(health)
+missing_values<- health |>
+  summarise(across(everything(), \(x) sum(is.na(x)))) |> #løper over alle kolonnene, og finner antall mangelene verdier i hver kolonne (markert med x). is.na(vektor) finner antall manglende verdier i en vektor
+  pivot_longer(cols = everything(),
+               names_to = "variabel",
+               values_to = "n_mangler")|>
+  mutate(andel_mangler  = n_mangler/n_total )
+
+
+missing_values
+  
+
+         
+```
+
+I observasjonen av apotek mangler det observasjoner i nesten 80% av tillfellende, mens i observasjonene av sykehus er det manglende informasjon i 45% av  tilfellende. Jeg har en hypotese om at de manglende observasjonene stort sett er i Afrika og Asia, alstå i land med svakere stater, slik at det er utfordrende å få ut data om utbyggingen av helsevesenet. For undersøkelen  av hvor dataen mangler, bruker vi bare landkode og frekevns av sykehus. 
+
+
+
+For å gjøre lage kartet, henter vi ut et datasett som gir oss geometrien til et verdenskart, og velger *iso_a3* som standariserte landkoder.  
+
+```{r}
+
+library(rnaturalearth)
+verdenskart <- rnaturalearth::ne_countries(
+  scale = "medium", returnclass  = "sf")|>
+  select(iso_a3)
+
+
+```
+
+Deretter må vi konveterer landkodene i datasettet vårt til *iso_a3*, slik at vi kan merge de to datasettene sammen. Vi bruker pakken *countrycode* til dette, men må være oppmerksomme på at noen land har ulike skrivemåter. Disse landene behandles separat. Deretter finner vi frekvensen av av manglede observasjoner per land, der **0 - alle mangler** og **1 - ingen mangler**
+
+```{r}
+
+
+library(countrycode)
+
+
+
+konvertering_til_iso3c_1 <-health |>
+  rename(land = GC_CNT_GAD_2025)|>
+  mutate(land = if_else(str_detect(land,"M.xico"),"Mexico",land)) |>
+  mutate(land = countrycode(land, 
+                                "country.name", 
+                                "iso3c",
+                                custom_match = c("Kosovo" = "XKX"))) |> #kosovo og meksiko må behandles separat
+  mutate(kontinent =countrycode(land,
+                                "iso3c",
+                                "continent",
+                                custom_match = c("XKX" = "Europe"))) 
+
+
+frekvenser <- konvertering_til_iso3c_1 |>
+  rename(helse = HL_FPC_HOS_2025)|>
+  select(land, helse) |>
+  summarise(antall_observasjoner = n(), manglende_observasjoner = sum(is.na(helse)),.by = land) |>
+  mutate(frekvens = (1- manglende_observasjoner/antall_observasjoner)) |>
+  select(land, frekvens)
+
+
+```
+hei
+
+
+Når vi har fått datasettet på formatet vi ønsker oss, kan vi kombinere det med datasettet som plotter et verdenskart.
+
+```{r}
+
+library(sf)
+library(scales)
+
+verdenskart_med_manglende_helseverdier <- verdenskart|>
+  left_join(frekvenser, by = join_by (iso_a3 == land ))|>
+  drop_na() #fjerner de manglende verdiene, alstå de landene som er i kart-geometrien, men som ikke er representert i datasette vårt
+p1 <- verdenskart_med_manglende_helseverdier |>
+  ggplot() + 
+  geom_sf(aes(fill = frekvens)) + 
+  labs(title = "frekvens av manglende observasjoner", fill = "dekning") +
+  scale_fill_gradient2(name = waiver(),
+                    low = muted("white"),
+                   high = muted("red"),
+                   na.value = "grey50",
+                   breaks = c(0,0.5,1.0),
+                   labels = c("Ingen","50%","Full"))
+
+p1
+
+```
+Vi  ser av kartet at landene i vesten og i amerika er mørkerøde, mens Kina og store deler av Asia er hvitt. Dette bekrefter hypotesen om at de mangelende informasjonen om utbyggingen av helsevesenet forekommer oftere i "det globale sør". Derfor bygger vi vidre analyse på landene i Europa, fordi det mangler få verdier fra disse landene. Vi ser også at Kina ikke har noen observerte data. 
+
+
+## Tetthet av  sykehus mot inntekt
+
+Vi konsentrerer oss om Europa og Amerika, og ønsker å finne forklaringsvariabler for antall sykehus per inbygger. Vi setter derfor opp følgene linjære regresjonsmodell $Y_i = \hat{b_0} + \hat{b_1}x_{i,1} + \hat{b_2}x_{i,2} + \hat{b_3}x_{i,3} + \epsilon_i$, der $Y_i$ er tettheten av sykehus, $x_{1,i}$ er arealet til tettstedet, $x_{2,i}$ er velstandsnivået (en diskret skala, world bank income group), $x_{3,i}$ er en konstant for urbaniseringsgraden og $x_{3,i}$ er antall mennesker i tettstedet. 
+
+```{r}
+
+modellering_tibble <- konvertering_til_iso3c_1 |>
+  select(land,kontinent, GC_UCA_KM2_2025,GC_POP_TOT_2025,GC_DEV_WIG_2025,HL_FPC_HOS_2025)|>
+  rename(areal =GC_UCA_KM2_2025, pop = GC_POP_TOT_2025, income =GC_DEV_WIG_2025,  hos_per_capita =HL_FPC_HOS_2025 )|>
+  drop_na() |>
+  filter(kontinent %in% c("Europe","Americas","Oceania"))
+
+
+```
+
+Når vi har satt opp tibbelen, så skal vi gjøre regresjonsmodeller på den. Vi setter opp en *recipe*, slik at vi kan bruke både vanlig linjær regresjon, samt LASSO når vi skal prøve å estimere hva som påvriker sykehusdekningen. 
+
+```{r}
+library(tidymodels)
+library(workflows)
+library(recipes)
+
+
+#deler dataen i to
+splittet_data <- initial_split(modellering_tibble,0.8,strata = kontinent)
+test_data <- testing(splittet_data)
+trening_data <- training(splittet_data)
+
+
+lm_model <- linear_reg() |>
+  set_engine("lm")
+
+rec <- recipe(hos_per_capita ~ ., trening_data)
+  
+wf <- workflow()|>
+  add_model(lm_model)|>
+  add_recipe(rec)|>
+  fit(trening_data)
+
+a <- predict(wf,test_data)
+a
+
+
+
+```

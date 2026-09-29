@@ -1,0 +1,124 @@
+---
+title: "Helsetilbud i ulike områder"
+
+author:
+  - name: Ragnhild Thielemann
+
+date: today
+date-format: D MMMM YYYY
+
+format: docx
+lang: nb # Uncomment if writing in Norwegian (gives "Figur", "Tabell")
+
+execute:
+
+  warning: false
+  message: false
+---
+
+Denne uken skal vi se på *Global Human Settlement Urban Centre Database Produced by the Joint Research Centre (JRC) of the European Commission*, som er et datasett som viser 10,000 urbane områder over hele verden. Variablene i datasettet er *befolkningstetthet*, *størrelse på byen*, samt en konstant for *urbaniseringsgrad*. 
+
+```{r}
+#| echo: false
+#| output: false
+
+library(tidyverse)
+library(tidytuesdayR)
+```
+
+
+
+```{r}
+
+tuesdata <- tidytuesdayR::tt_load(2026, week = 39)
+health <- tuesdata$health 
+
+View(health)
+
+```
+Når vi åpner datasettet, observerer vi at det mangler mange observasjoner. Før vi jobber vidre, finner vi ut antall manglende observasjoner per kolonne. 
+
+```{r}
+
+n_total <- nrow(health)
+missing_values<- health |>
+  summarise(across(everything(), \(x) sum(is.na(x)))) |> #løper over alle kolonnene, og finner antall mangelene verdier i hver kolonne (markert med x). is.na(vektor) finner antall manglende verdier i en vektor
+  pivot_longer(cols = everything(),
+               names_to = "variabel",
+               values_to = "n_mangler")|>
+  mutate(andel_mangler  = n_mangler/n_total )
+
+
+missing_values
+  
+
+         
+```
+
+I observasjonen av apotek mangler det observasjoner i nesten 80% av tillfellende, mens i observasjonene av sykehus er det manglende informasjon i 45% av  tilfellende. Jeg har en hypotese om at dette er geografisk lokert, da det ofte er vanskelig å få ut informasjon fra utviklingsland om tettheten av helsetjenester. Derfor ønsker vi å lage et kart som viser andelen av manglende verdier for helsetjenestene, plassert fra land. 
+
+Det første vi må gjøre, er å få landene på iso_3c-format, slik at de kan merges sammen med verdenskaret. 
+
+```{r}
+data_pa_iso3 <- health |>
+  dplyr::select(HL_FPC_PHA_2025,GC_CNT_GAD_2025)|>
+  rename(land = GC_CNT_GAD_2025,
+         sykehus =HL_FPC_PHA_2025 )|
+```
+
+```{r}
+
+library(rnaturalearth)
+library(sf)
+library(countrycode)
+#laster ned et datasett over verdens land
+world <- rnaturalearth::ne_countries(
+  scale = "medium", returnclass  = "sf")|>
+  select(iso_a3)
+View(world)
+#jeg må først finne frekvensen per land
+
+konvertering_til_iso3c <- health |>
+  select(HL_FPC_PHA_2025,GC_CNT_GAD_2025)|>
+    mutate(GC_CNT_GAD_2025 = if_else(str_detect(GC_CNT_GAD_2025, "M.xico"), "Mexico", GC_CNT_GAD_2025)) |> #Må håndtere mexico manuelt
+
+  mutate(GC_CNT_GAD_2025 = countrycode(GC_CNT_GAD_2025, origin = "country.name", "iso3c",
+                                       custom_match = c("Kosovo" = "XKX")))|> #kosovo må behandles manuelt, da det ikke er et annerkjent land
+  
+  summarise(antall_observasjoner = n(), manglende_observasjoner = sum(is.na(HL_FPC_PHA_2025)),.by = GC_CNT_GAD_2025)|>
+  mutate(frekvens = manglende_observasjoner/antall_observasjoner)|>
+  rename(land = GC_CNT_GAD_2025)|>
+  select(land, frekvens)
+
+
+View(konvertering_til_iso3c)
+
+map_for_plotting <- world |>
+  left_join(konvertering_til_iso3c, by = join_by (iso_a3 == land )) |>
+  
+
+  mutate(kontinent = countrycode(iso_a3,
+                                  origin = "iso3c",
+                                  destination = "continent",
+                                 custom_match = c("XKX" = "Europe"))) |>
+  drop_na(frekvens) 
+
+
+
+
+
+         
+```
+
+Nå har vi gjort klare datasettene våre, og er klare for å se på andelen manglende observasjoner basert på kontinent. 
+
+```{r}
+
+p1 <- map_for_plotting |>
+  ggplot() + 
+  geom_sf(aes(fill = frekvens))
+
+p1
+
+```
+
