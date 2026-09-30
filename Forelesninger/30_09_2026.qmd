@@ -1,0 +1,54 @@
+---
+title: "30_09_2026"
+format: html
+---
+
+## Ikkerektangulær data
+
+Rektangulær data er data som er i en dataframe. 
+- Tree-structure på dataframes
+
+- JSON-files (JavaSdcript Object Notation)
+  - Hirarkisk data lagret som tekst
+  - Nested struktur
+    - Må unneste i flere steg
+      - Gjerne unnest_longer og unnest_wider
+  - Pakken **jsonlite** konverterer JSON-data til data.frame. 
+  
+_ XML - Extensible Markup Language
+  - A markup language (like HTML)
+  - Kan lagre alle type data
+  - Office-filer er zippet kolleksjoner av XML
+  - **xml2** konvertere dette
+  
+  
+**I begge tilfeller lager vi stier inn på det aktuelle nettstedet**
+
+
+### Ustrukturert data
+
+- Kan lese hver linje i filen i en tekst med **scan()**. 
+
+## Databaser
+
+Databaser = en tibble for transaksjoner. en tibbel for infomasjon om kunder. en tibbel for produktene. Gjør store datamengder lettere å håndtere. 
+
+
+## Geospatial data
+
+Lokasjonen eller geometien av noe. 
+
+- Kobinerer lokasjonen eller geometrien til noe
+- Tilhørende informasjon - inntekt, populasjon og tempeatur
+
+  - Vektor data - punkter, linjer eller polynomer
+  - Direkte sammenehenger (veier, byer og land). Ofte med atrubutter (inntekt eller populasjon)
+  
+Raster data - piksler emd verdier
+  - Representerer kontinuelige overflater med rektangulære nettverk (hver piksel eller celler har en verdi)
+  
+  
+
+
+
+  
