@@ -1,0 +1,196 @@
+---
+title: "Seminar 5"
+subtitle: ""
+author:
+  - name: Ragnhild Thielemann
+date: today
+date-format: D MMMM YYYY
+
+format: docx
+number-sections: true
+lang: nb # Uncomment if writing in Norwegian (gives "Figur", "Tabell")
+citeproc: true
+execute:
+
+  warning: false
+  message: false
+---
+```{r}
+#| echo: false
+
+library(tidyverse)
+library(countrycode)
+library(scales)
+library(sf)
+library(rnaturalearth)
+```
+
+```{r}
+#| echo: false
+wwbi_data <- read_csv("wwbi_data.csv")
+gdp <- read_csv("gdp.csv")
+```
+### Data for Norges andel i offentlig sektor
+
+```{r}
+offentlig_sektor_norge <- wwbi_data |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS",
+         country_code == "NOR")
+print(offentlig_sektor_norge$year)
+```
+
+Vi ser at det bare er tilgjenglig data for den offentlige sektors andel av total sysselsetting i Norge for 2027. 
+
+## Utviklingen av andelen sysselsatt
+
+```{r}
+
+boksplott <- wwbi_data |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS") |>
+  select(year, value) |>
+  ggplot(aes(year, value)) + 
+  geom_boxplot(aes(group = year)) + 
+  labs(x = "year", y = "andel", title = "andel av sysselsatte i offentlig sektor")
+
+boksplott
+
+```
+Av plottet ser vi at medianen for sysselsatte i offenlig sektor falt i 2008 og i 2015. Dette kan henge sammen med finanskrisen i 2008, og oljepriskrisen i 2015. 
+
+
+
+
+
+## Sammenheng mellom gdp per capita og andel i offentlig sektor
+
+
+```{r}
+gdp_mot_offentlig <- wwbi_data |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS") |>
+  left_join(gdp, by = join_by (year,country_code ))|> 
+  drop_na() 
+p2 <- gdp_mot_offentlig |>
+  ggplot(aes(x = gdp_cap, y = value)) + 
+  geom_smooth() + 
+  labs(x = "BNP per capita (2015 US$)", y = "Andel i offentlig sektor", title = "Andel i offentlig sektor mot BNP") + 
+  scale_x_continuous (breaks = seq(0,105000,15000),
+                      labels = seq(0,105000,15000)) 
+p2
+
+```
+
+Vi lager også et logatitimisk plott
+```{r}
+gdp_mot_offentlig <- wwbi_data |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS") |>
+  left_join(gdp, by = join_by (year,country_code ))|> 
+  drop_na() 
+p2 <- gdp_mot_offentlig |>
+  ggplot(aes(x = gdp_cap, y = value)) + 
+  geom_smooth() + 
+  labs(x = "log(BNP per capita (2015 US$))", y = "Andel i offentlig sektor", title = "Logaritmisk plott") + 
+  scale_x_log10() 
+p2
+
+```
+
+
+Av plottet ser det ut til at land med nærmest null i GDP per capita har en stor andel i offentlig sektor, før andelen avtar når BNP per capita øker til 15 000 dollar. Deretter øker andelen av antall sysselsatte i offentlig sektor når BNP øker, før andelen avtar når BNP per capita bikker 60 000 dollar. 
+
+For å undersøke disse ekstreme utfallene, ser jeg hvilke land som ligger i toppskiktet og bunnskikrte av BNP per capita. 
+
+
+
+```{r}
+ovre_gdp <- gdp |>
+  mutate(land = countrycode(country_code, 
+                            origin = "iso3c",
+                            destination = "country.name"))|>
+  arrange(desc(gdp_cap))|>
+  drop_na()
+
+print(unique(ovre_gdp$land)[1:8])
+```
+Når vi finner de øvere verdiene av  BNP per inbygger får vi opp skatteparadiser som de øverste plasseringene. Vi unersøker datasettet nærmere, og ser at de 85 første plassene er skatteparadiser som Monaco, Lichtenstein, Bermuda, Luxembourg, Caynom Islands. BNPen i disse landene kommer av at selskaper plasserer noteres i skatteparadisene, uten at arbeidsplassene eller selskapseierne nødvendigvis flytter til landene. Mange av selskapene har også mye virksomhet over nett, og krever ikke fysisk tilstedeværelse av de ansatte i skatteparadisene. Dette gjør behovet for offenlige tjenester i disse landene lavt (lite behov for sykehus, skoler og barnehager), som kan forklare den lave sysselsettingsandelen i offenltig sektor.
+
+# Kart for å forstå tallene
+
+Når vi undersøker bunnskiktet av BNP per capita, der vi så at lav BNP per capita var korrelert med høy sysselsettingsandel i offentlig sektor, ser vi at disse landene er lokalisert i Afrika. For å gjøre denne visualsieringen tydligere, lager vi et kart for dette. Vi oppretter først et kart med kart-geometrien fra *rnaturalearth*, før vi merger dette sammen med *gdp per capita* og *sysselsettingsandelen i offentlig sektor*
+
+```{r}
+
+offentlig <- wwbi_data |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS") 
+
+
+  
+kart <- rnaturalearth::ne_countries(scale = "small") |>
+  select(iso_a3)
+
+kart_gdp <- kart |>
+  left_join(gdp, by = join_by(iso_a3 == country_code)) |>
+  mutate(gdp = mean(gdp,na.rm= TRUE),.by = iso_a3)|>
+  ggplot() +
+  geom_sf(aes(fill = gdp_cap)) + 
+  labs(title = "BNP per capita", fill = "2015 $US") +
+  scale_fill_gradient2(name = waiver(),
+                    low = muted("white"),
+                   high = muted("red"),
+                   na.value = "grey50") + 
+   theme_void() 
+
+kart_gdp
+
+```
+
+
+```{r}
+kart_offentlig <- kart |>
+  left_join(offentlig, by = join_by(iso_a3 == country_code)) |>
+  mutate(value = mean(value,na.rm= TRUE),.by = iso_a3)|>
+  ggplot() +
+  geom_sf(aes(fill = value)) + 
+  labs(title = "Andel i offentlig sektor", fill = "Andel i prosent") +
+  scale_fill_gradient2(name = waiver(),
+                    low = muted("blue"),
+                   high = muted("red"),
+                   na.value = "grey50",
+                   breaks = seq(0,1,0.25),
+                   labels = sprintf("%s ", seq(0,1,0.25)*100)) + 
+   theme_void() 
+
+kart_offentlig
+
+```
+Vi ser at det er en stor andel i offentlgi sektor i Afrika, Bangladesh og India, til tross for at disse landene har lave BNP per capita. Dette kan komme av  bistandsprosjekteter sysselsetter mange i offentlig sektor, og at bistandsmidlene avtar når BNP øker i landet. 
+
+
+## Helsearbeiderenes lønn mot gjennomsnittlig lønn
+
+```{r}
+
+helse <- wwbi_data |>
+  filter(indicator_code == "BI.WAG.PREM.HE") |>
+  summarise(max_year = max(year), value = value[year == max_year], .by = (country_code))|> #får da gdp i det gitte året
+  left_join(gdp,by = join_by (country_code, max_year == year)) |>
+  mutate(kontinent = countrycode(country_code, 
+                                 "iso3c",
+                                 "continent"))
+
+
+p2 <- helse |>
+  ggplot(aes(x = gdp_cap, y = value, color = kontinent)) + 
+  geom_point() +
+  geom_label(aes(label = country_code),
+                 size = 2.5,
+                 label.padding = unit(0.1, "lines")) +
+  scale_x_log10()
+
+p2
+
+```
+
+
+
+
+

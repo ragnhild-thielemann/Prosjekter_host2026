@@ -1,6 +1,6 @@
 ---
 title: "30_09_2026"
-format: html
+format: docx
 ---
 
 ## Ikkerektangulær data
@@ -45,9 +45,48 @@ Lokasjonen eller geometien av noe.
   - Direkte sammenehenger (veier, byer og land). Ofte med atrubutter (inntekt eller populasjon)
   
 Raster data - piksler emd verdier
-  - Representerer kontinuelige overflater med rektangulære nettverk (hver piksel eller celler har en verdi)
+  - Representerer kontinuelige overflater med rektangulære nettverk (hver piksel eller celler har en verdi).
+      - Typisk er ulike verdier (hver pixel er en slags matrise), og verdiene hører til med farger.
+  - Stort sett bilder 
+  - Grid og cells med en gitt resulisjon
+  - Hver celle har en verdi (høydemeter i meter)
+  - Rektangulær og kontinuelig
   
-  
+ - label 
+    - knytter flere ting sammen
+
+  - vector data
+    - punkter (skoler)
+    - linjer (veier, grenser)
+    - områder (land)
+      - innenfor et lukket område
+      
+    - RGB - kan lage alle farger
+    
+## Jobbe med geospatial data
+
+
+- Lokale beregininger
+  - Brukbart for de fleste praktiske oppgaver i økonomi
+  - Vektor
+    - **sf** - pakken
+      - Det er en tibble, som har en kolonne med den geometiske struturen til datapunktet. 
+        - Varierende kompelsitet på geometrien 
+    - alt annet fungerer som før
+      4326 # et magisk tall for dette
+      
+- **terra** 
+  - intuitiv og raskt (skrevet i C++, som gjør det raskere)
+- **zonal statistikk**
+
+theme_void()
+  - fjerner aksene, da de er irrelevante
+
+```{r}
+
+```
+
+
 
 
 
