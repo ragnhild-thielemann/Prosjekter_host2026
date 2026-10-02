@@ -1,0 +1,99 @@
+---
+title: "fangenes_dilemma"
+format: html
+---
+|Symbol|Betydning|
+|S| 0|
+|K| 1|
+
+## valg av  funksjoner
+```{r}
+library(tidyverse)
+
+
+naiv_snill <- function(){
+  return(0)}
+
+naiv_slem <- function(){
+  return(1)
+}
+
+random <- function(){
+  return(rdunif(1,0,1))
+  
+ 
+}
+
+svikt <- function(annen_spiller){
+  if (any(annen_spiller) == 1){
+    return(1)
+  }else{
+    return (0)
+  }
+}
+
+tit_for_tat <- function(annen_spiller){
+  if (length(annen_spiller)==0){
+    return(0) 
+    } else{
+      return(annen_spiller[length(annen_spiller)])
+    }
+    }
+
+
+
+```
+
+
+## Payofs
+
+```{r}
+
+payofs <- function(a,b){
+  if (a == 0 & b == 0){
+    return (c(3,3))
+  } 
+  if (a == 1 & b == 0){
+    return(c(4,0))
+  }
+   if (a == 0 & b == 1){
+    return(c(0,4))
+   }
+  if (a ==1 & b == 1){
+    return(c(1,1))
+}
+}
+```
+```{r}
+
+Time <- 100
+
+spiller_a <- vector("integer",Time)
+spiller_b <- vector("integer",Time)
+
+payof_a <- vector("integer",Time)
+payof_b <-vector("integer",Time)
+
+
+for (t in 1:Time){
+  A = naiv_slem()
+  B= random()
+  
+  payof_a[t] =payofs(A,B)[1]
+  payof_b[t] =payofs(A,B)[2]
+  spiller_a[t] = A
+  
+  spiller_b[t] = B
+
+  }
+
+
+
+sprintf("A tjener %g",sum(payof_a))
+sprintf("B tjener %g",sum(payof_b))
+
+
+
+
+```
+

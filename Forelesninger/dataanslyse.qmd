@@ -1,0 +1,162 @@
+---
+title: "dataanslyse"
+format: docx
+---
+
+
+
+# Lagring av tall på datamaskinen
+
+### Binære tall
+
+Datamaskiner bruker det binære tallsystemet, som bare består av sifrene 0 og 1. Tallene representeres av linjærkombinasjoner av potenser av to. 
+
+
+$3\text{ bits} \Rightarrow 2^3 = 8$
+
+gir ulike kombinasjoner, og dermed 8 unike verdier som kan representeres. For heltall, brukes følgende algoritme til å finne den binære representasjonen av et tall:
+
+```{r}
+
+tall <-46
+bi <- c()
+tallsystem <- 2
+while (tall > 0){
+  rest <- tall %% tallsystem #heltallsdivisjon
+  bi <- c(rest,bi)
+  tall <- tall %/% tallsystem
+}
+  
+  
+print(bi)
+  
+```
+
+Det er derfor ikke helt riktig å si at «en bit er en toerpotens». Det riktige er at (n) bits gir (2^n) mulige kombinasjoner.
+
+## Lagring av flyttall
+
+Tall lagres på formen $x = b \cdot 2^n$ der (b) er signifikanten, og (n) er eksponenten. Dette tilsvarer normalformen for desimaltall $x=b\cdot 10^n,
+\qquad 1\leq b<10.$
+For binære flyttall brukes tilsvarende $x=b\cdot 2^n,
+\qquad 1\leq b< 2.$
+
+### lagring av data
+
+En vanlig måte å lagre flyttall på er 64-bits flyttall, der de 64 bitsene fordeles slik 
+  - 1 bit til fortegn
+  - 11 bits til eksponent (n)
+  - 52 bits til signifikand (b)
+
+Flyttall kan repreentere både svært store og svært små tall, men dette er en avvegning mellom *størrelsesområde og presisjon*. $0.1$ kan ikke representeres eksakt i binær representasjon, og gir derfor små avrundingsfeil. Derfor er $0.1 + 0.2 == 0.3$ lik **false**. 
+
+### Inf og NaN
+
+  - Inf er postiv uendelighet $\frac{1}{0}$
+  
+  - -Inf er negativ uendelighet
+  - NaN er *not a number*, altså ikke et gyldig tall. $\frac{0}{0}$
+  
+
+## kategoriske variabler
+
+En kategorisk variabel inneholder verdier som representerer ulike kategorier.
+
+Eksempel:
+
+Kjønn:     kvinne, mann, annet
+Prisområde: NO1, NO2, NO3, NO4, NO5
+
+I R kan kategoriske variabler lagres som factor:
+
+as.factor(x)
+
+En factor lagrer informasjon om hvilke kategorier som finnes, og kan være nyttig blant annet i statistiske modeller.
+## Bokstaver
+
+Datamaskiner lagrer ikke bokstaver direkte. Tegn representeres gjennom numeriske koder, som igjen lagres binært.
+
+### ASCII
+
+ASCII står for American Standard Code for Information Interchange.
+
+ASCII bruker 7 bits og kan derfor representere $2^7=128$ ulike tegn.
+
+Eksempler:
+
+0–9: kode 48–57
+A–Z: kode 65–90
+a–z: kode 97–122
+mellomrom: kode 32
+kode 0–31: kontrolltegn
+
+#### Andre tegnsett
+
+Det ble derfor utviklet flere tegnsett for å kunne representere flere tegn, blant annet: **ISO-8859-1 (Latin-1)**, samt andre regionale tegnsett
+
+Problemet er at ulike tegnsett bruker de samme tallkodene til forskjellige tegn. Dersom en tekstfil leses med feil tegnsett, kan bokstaver derfor bli vist feil. En tekstfil kan bare håntere ett tegnsett, og dette må spesifiseres. (samme byte kan beskrive ulike bokstaver i ulike tegnsett). 
+
+### Unicode
+
+Et system som gir et tegn en unik kode, slik at mange skrifstystemer kan representeres. Hvert tegn får en unik kodepunktverdi, som skrives i *heksadesimal* form. Heksdsimal form er 4 bites (heksadesimal form gjør at tallene kan skrives mer kompakte), som gir en verdi mellom (1 og f). Unicode bruker punkter fra $0 \text{ til } 10FFFF_{16}$ Unicode bestemmer hvilket tall/kodepunkt hvert tegn har. UTF-8, UTF-16 og UTF-32 er ulike måter å lagre disse unicode-kodepunktene på. Dette må spesifiseres i lesing av tekstfiler.
+```{r}
+#| warning: false
+#| output: false
+library(tidyverse)
+
+read_delim("data.csv", delim = ";", locale = locale(encoding = "UTF-8") )
+ 
+ 
+```
+
+
+
+
+
+# Geometrier
+
+Knytter observasjoner til områder
+  
+### Raster 
+  - Rasterdata represetnerer et område som et rektangulært rutenett av celler/piksler. Hver celle har en verdi.
+    - Verdien kan være farge, tempeatur, negbør
+  - Brukes til satelittbilder, høydekart, klimadata. 
+  - Oppløsningen bestemmes av størrelsen på cellene. Mindre celler gir høyer oppløsning, men også større datamengde. Manglende verdier er *NA* (gir gjerne hvite områder)
+  
+  
+## Vektor-grafikk
+
+- Repreenteer geografiske områder gjennom geometiske objekter. 
+
+|Objekt|Eksempel|
+|-|-|
+|Punkt|Skole, kraftverk, målestasjon, byer|
+|Linje|Vei,Grense|
+|Polygoner|Lukkede områder, land, kommuner|
+
+Vektorgrafikk kan ha flere variabler og informajsjon knyttet til samme punkt, i motsetning til raster-data. 
+
+|Raster|Vektor|
+|-|-|
+|Celler/pikseler|Punkter, linjer, polygoner|
+|Hver celle har en verdi|Geometrien har tilknyttede egenskaper|
+|Kontinuelige data|Avgrensede områder, punktvis|
+|Temperatur, høyde, satilitter| Veier, kommuner, skoler|
+
+
+    
+## Jobbe med geospatial data i R
+
+**sf**- simple features. Et sf-objekt ligner på en tibble, men inneholder også en geometri til objektet. 
+|Kommune|Inb
+
+- Lokale beregininger
+  - Brukbart for de fleste praktiske oppgaver i økonomi
+  - Vektor
+    - **sf** - pakken
+      - Det er en tibble, som har en kolonne med den geometiske struturen til datapunktet. 
+        - Varierende kompelsitet på geometrien 
+    - alt annet fungerer som før
+      4326 # et magisk tall for dette
+      
+  
