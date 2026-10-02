@@ -11,21 +11,21 @@ format: html
 library(tidyverse)
 
 
-naiv_snill <- function(){
+naiv_snill <- function(annen_spiller){
   return(0)}
 
-naiv_slem <- function(){
+naiv_slem <- function(annen_spiller){
   return(1)
 }
 
-random <- function(){
+random <- function(annen_spiller){
   return(rdunif(1,0,1))
   
  
 }
 
 svikt <- function(annen_spiller){
-  if (any(annen_spiller) == 1){
+  if (any(annen_spiller == 1)){
     return(1)
   }else{
     return (0)
@@ -40,7 +40,7 @@ tit_for_tat <- function(annen_spiller){
     }
     }
 
-
+liste = c(naiv_snill, naiv_slem, random, svikt,tit_for_tat)
 
 ```
 
@@ -50,10 +50,10 @@ tit_for_tat <- function(annen_spiller){
 ```{r}
 
 payofs <- function(a,b){
-  if (a == 0 & b == 0){
+  if (a == int(0) & b == int(0)){
     return (c(3,3))
   } 
-  if (a == 1 & b == 0){
+  if (a == int(1) & b == int(0)){
     return(c(4,0))
   }
    if (a == 0 & b == 1){
@@ -76,8 +76,8 @@ payof_b <-vector("integer",Time)
 
 
 for (t in 1:Time){
-  A = naiv_slem()
-  B= random()
+  A = svikt(spiller_b)
+  B= random(spiller_a)
   
   payof_a[t] =payofs(A,B)[1]
   payof_b[t] =payofs(A,B)[2]
@@ -92,8 +92,52 @@ for (t in 1:Time){
 sprintf("A tjener %g",sum(payof_a))
 sprintf("B tjener %g",sum(payof_b))
 
+ 
+
+```
+
+```{r}
+library(rlang)
+
+liste = list(naiv_snill = naiv_snill, naiv_slem = naiv_slem, random = random, svikt= svikt,tit_for_tat = tit_for_tat)
+optimal_strategi = c()
+total_nytte = 0
+
+for (navn_a in names(liste)){
+  for (navn_b in names(liste)){
+    strategi_a = liste[[navn_a]]
+    strategi_b = liste[[navn_b]]
+    Time <- 1000
+
+spiller_a <- vector("integer",Time)
+spiller_b <- vector("integer",Time)
+
+payof_a <- vector("integer",Time)
+payof_b <-vector("integer",Time)
 
 
+for (t in 1:Time){
+  A = (strategi_a)(spiller_b)
+  B= (strategi_b)(spiller_a)
+  
+  payof_a[t] =payofs(A,B)[1]
+  payof_b[t] =payofs(A,B)[2]
+  
+  spiller_b[t] = B
+  spiller_a[t] = A
 
+}
+if (sum(payof_a + payof_b)>total_nytte){
+  total_nytte = sum(payof_a + payof_b)
+  optimal_strategi = list(navn_a,navn_b)
+}
+print(c(sum(payof_a),sum(payof_b)))
+
+
+ 
+  }
+}
+
+print(optimal_strategi)
 ```
 

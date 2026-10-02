@@ -1,0 +1,107 @@
+---
+title: "eurovision"
+format: html
+---
+## Impoterer nødvendige biblioteker
+```{r}
+
+library(tidyverse)
+library(readxl)
+library(janitor)
+
+```
+
+
+```{r} 
+
+esc <- read_csv("esc.csv") #leser funksjonen automatisk inn som en tibble
+View(esc)
+```
+
+## Finner antall land og deltagere
+```{r}
+
+deltagere <- nrow(esc)
+land <- ncol(esc|>
+           select(-c(ends_with("score"),contestant)))
+
+sprintf("Det er %g deltagere og %g land som gir poeng", deltagere, land)
+
+
+```
+
+## Tranformerer til et long-format
+
+
+```{r}
+
+esc_long <- esc |>
+  pivot_longer(cols = -contestant,
+               names_to = "awarding",
+               values_to = "score")|>
+  mutate(score = replace_na(score,0))
+
+```
+
+```{r}
+antall_tolvere <- esc_long |>
+  filter(score == 12) |>
+  summarise(antall_tolvere = n(), .by = contestant)|>
+  arrange(desc(antall_tolvere))
+
+antall_tolvere
+
+```
+Vi ser at Østerrike har flest tolvere i 2025. 
+
+
+## Finne ut om hvorvidt land trader poeng
+
+
+```{r}
+
+
+reverse <- esc_long |>
+  
+  #filtreer bare ut dem som kan få poeng
+  filter(awarding %in% contestant)|>
+  rename(reverse_score = score) |>
+  
+  #bruker likhet mellom ulike kolonner til å merge ddem sammen
+  left_join(esc_long |>
+             filter(awarding %in% contestant), join_by(awarding ==contestant, contestant== awarding ) )
+
+
+
+```
+
+## Sortere en stygg excecl-fil
+
+
+```{r}
+
+a <- colnames(esc)
+
+b <- colnames(esc_excel)
+
+esc_tv <- read_excel("esc.xlsx", sheet = "Televote" ) |>
+  slice(4:n())|>
+  select(-c(ends_with("used:"),"...43")) |>
+  rename_with(~a) |> #syntaks for å endre hele kolonnen
+  mutate_at(vars(-contestant),as.numeric)|>
+  pivot_longer(cols = -contestant, 
+               names_to ="awarding", 
+               values_to ="score")|>
+  mutate(score = replace_na(score,0))
+
+print(esc_tv)
+
+total_tibble <- esc_tv |>
+  left_join(esc_long, by = join_by(contestant, awarding), suffix  = c("_jury","_tv")) |>
+  mutate(diff = score_jury - score_tv)|>
+  summarise(total_diff = sum(diff),.by = contestant)|>
+  arrange(total_diff)
+View(total_tibble)
+
+
+```
