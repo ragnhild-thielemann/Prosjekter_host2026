@@ -1,0 +1,207 @@
+---
+title: "norad"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(docstring)
+norad <- read_csv("norad_1.csv")
+```
+Datasettet er en behandlet API. 
+
+```{r}
+
+rows = nrow(norad)
+projects = length(unique(norad$agreement_number))
+
+sprintf("Det er %g raeder i datasettet", rows)
+
+sprintf("Det er %g unike prosjekter", projects)
+
+
+```
+
+## Skal finne antall prosjekter per land
+
+
+```{r}
+antall_prosjekter <- norad |>
+  select(agreement_number, recipient_country) |>
+  summarise(agreement_number = unique(agreement_number), .by = c(agreement_number,recipient_country ))|>
+  summarise(antall = n() , .by = recipient_country)
+  
+sprintf("Det er totalt %g fordelt pa de ulike landene",(sum(antall_prosjekter$antall)))
+
+(antall_prosjekter)
+```
+
+Da noen prosjekter er delt mellom to land, ser vi at det totale antallet prosjekter fordelt på land er noe større enn de unike prosjektene (39 prosjekter er fordelt mellom to land). 
+
+## Antall prosjekter med negativ støtte
+
+```{r}
+
+antall_negative <- norad |>
+  filter(disbursements_1000_nok < 0) |>
+  nrow()
+
+
+sprintf("Det er %g prosjekter med negativ stotte",antall_negative)
+
+```
+
+Fjerner så prosjektnee som har negativ støtte
+```{r}
+
+norad_red <- norad |>
+  filter(disbursements_1000_nok>=0)
+
+```
+
+
+```{r}
+
+
+kvantilplott <- norad_red |>
+  select(recipient_country,disbursements_1000_nok,year)|>
+  
+  summarise(q25 = quantile(disbursements_1000_nok,0.25), p50 =quantile(disbursements_1000_nok,0.5), p75 =  quantile(disbursements_1000_nok,0.75) ,.by = year)|>
+  pivot_longer(cols = -year,
+               names_to = "kvantil", 
+               values_to = "stotte")|>
+  ggplot(aes(x = year, y = stotte, color = kvantil)) + 
+    geom_line() + 
+  scale_x_continuous(breaks = seq(2010,2026,2),
+                     labels = seq(2010,2026,2)) +
+  labs(title = "Utviklingen til bistandsstotten",
+       x = "year", y= "stotte i 100 nok", color = "kvantil")
+  
+  
+kvantilplott
+
+                           
+                      
+
+```
+
+```{r}
+
+
+regional <- norad_red |>
+  mutate(r = if_else(word(recipient_country,-1) %in% c("Regional","regional"),0,1))
+
+andel <- sum(regional$r)/nrow(regional)
+
+sprintf("Det er %g prosent av Norges bistandsprosjekter som er regionale ", andel * 100)
+
+```
+
+```{r}
+
+library(countrycode)
+total_bistand_2020 <- norad_red |>
+  filter(year == 2024)|>
+  summarise(total = sum(disbursements_1000_nok), .by = c(recipient_country))|>
+  filter(!word(recipient_country,-1) %in% c("Regional","regional") )|>
+  mutate(iso_a3 = countrycode(recipient_country,
+                             "country.name",
+                             "iso3c"))|>
+  
+  dplyr::select(total, iso_a3)
+
+
+  
+```
+
+
+```{r}
+
+library(rnaturalearth)
+library(sf)
+library(scales)
+
+
+#lager et verdenskart
+world <- rnaturalearth::ne_countries(scale = "medium")
+
+tibble_plott <- world |>
+  select(iso_a3) |>
+  left_join(total_bistand_2020, by = join_by (iso_a3)) |>
+  mutate(kontinetnt = countrycode(iso_a3, 
+                                  "iso3c",
+                                  "continent"))|>
+  filter(kontinetnt == "Africa")
+
+plot <- tibble_plott |>
+
+  ggplot() + 
+  geom_sf(aes(fill = total)) +
+  
+
+  labs(title = "Totalt motatt bistandstotte (2024)", fill = "NOK (millioner)") +
+  scale_fill_gradient2(name = waiver(),
+                    low = muted("white"),
+                   high = muted("red"),
+                   na.value = "grey50",
+                   labels = label_comma(scale = 1e-5)) + 
+  theme_void()
+
+
+plot
+
+```
+
+
+```{r}
+
+library(rnaturalearth)
+library(sf)
+library(scales)
+
+
+
+sist <- norad_red |>
+  select(year,disbursements_1000_nok,recipient_country)|>
+  filter(!word(recipient_country) %in% c("region","Region"))|>
+  summarise(total_stotte = sum(disbursements_1000_nok, na.rm = TRUE), .by = c(recipient_country, year))
+
+
+siste_plott <- sist|>
+  
+  summarise(est = as.numeric(lm(total_stotte~year)$coef[2]), .by =recipient_country ) |>
+  mutate(iso_a3 = countrycode(recipient_country,
+                             "country.name",
+                             "iso3c"))
+
+
+
+tibble_plott <- world |>
+  dplyr::select(iso_a3) |>
+  left_join(siste_plott, by = join_by (iso_a3)) |>
+  mutate(kontinetnt = countrycode(iso_a3, 
+                                  "iso3c",
+                                  "continent"))|>
+  filter(kontinetnt == "Africa")
+
+plot <- tibble_plott |>
+
+  ggplot() + 
+  geom_sf(aes(fill = est)) +
+  
+
+  labs(title = "Endring i bistandsstøtte", fill = "NOK (millioner)") +
+  scale_fill_gradient2(name = waiver(),
+                    low = muted("blue"),
+                   high = muted("red"),
+                   mid = "white",
+                   midpoint = 0,
+                   na.value = "grey50",
+                   labels = label_comma(scale = 1e-5)) + 
+  theme_void()
+
+
+plot
+
+
+```

@@ -1,0 +1,70 @@
+---
+title: "task_1_pa_seminar"
+format: html
+---
+
+
+
+```{r}
+
+
+library(tidyverse)
+
+
+wwbi <- read_csv("wwbi_data.csv")
+
+
+
+```
+
+```{r}
+
+
+norge <- wwbi |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS")|>
+  filter(country_code == "NOR")
+
+print(unique(norge$year))
+```
+
+Vi får at det bare er registrert data for andelen sysselsatte i offenlig sektor i Norge i 2017. 
+
+Skal lage et boksplott, som visser andelen av sysselsatte som er i offenlig sektor, der de er grupert på år.
+```{r}
+
+
+boksplott <- wwbi |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS")|> 
+  ggplot(aes(x = year, y = value)) + 
+  geom_boxplot(aes(group = year))
+  
+
+boksplott
+```
+
+Vi ser at median andel falt dramatisk i 2008, samt i 2015. Dette henger sammen med finanskrisen og  oljeprisfallet.
+
+```{r}
+library(scales)
+
+gdp <- read_csv("gdp.csv")
+
+total_tibble <- gdp |>
+  left_join(wwbi, by = join_by(country_code, year))|>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS")|> 
+  
+  #fjerner urelavente verdier
+  drop_na()
+
+
+scatter <- total_tibble|>
+  ggplot(aes(x = (gdp_cap), y = value)) + 
+  geom_point() +
+  scale_x_log10(label = label_comma(scale = 1e-3)) 
+
+scatter 
+
+
+```
+
+
