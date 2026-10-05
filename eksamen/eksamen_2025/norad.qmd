@@ -190,7 +190,7 @@ plot <- tibble_plott |>
   geom_sf(aes(fill = est)) +
   
 
-  labs(title = "Endring i bistandsstøtte", fill = "NOK (millioner)") +
+  labs(title = "Endring i bistandsstotte", fill = "NOK (millioner)") +
   scale_fill_gradient2(name = waiver(),
                     low = muted("blue"),
                    high = muted("red"),

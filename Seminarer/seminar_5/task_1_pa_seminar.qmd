@@ -68,3 +68,14 @@ scatter
 ```
 
 
+```{r}  
+
+#tar bare vare på den siste verdiern
+wwbi_max <- wwbi |>
+  filter(indicator_code == "BI.EMP.FRML.PB.ZS")|> 
+  filter(year == max(year), .by = c(country_code))
+
+View(wwbi_max)
+
+
+```

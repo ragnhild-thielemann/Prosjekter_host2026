@@ -1,0 +1,128 @@
+---
+title: "vdem"
+format: html
+---
+
+```{r}
+library(tidyverse)
+
+```
+
+```{r}
+vdem <- read_csv("vdem.csv")
+
+sprintf("Datasettet går fra %g til %g", as.integer(summary(vdem$year)["Min."]), 
+    summary(vdem$year)["Max."]    )
+
+
+antall_i_2021 <- vdem |>
+  filter(year == 2021)|>
+  nrow()
+
+sprintf("Det var %g land i 2021",antall_i_2021)
+```
+```{r}
+
+norge_usa <- vdem |>
+  filter(country_text_id %in% c("NOR","USA")) |>
+  dplyr::select(country_name,year,v2x_libdem)
+  
+p1 <- norge_usa|>
+  ggplot(aes(x = year, y = v2x_libdem,color = country_name)) + 
+  geom_line() + 
+  labs(x = "ar", y = "demokratiscore (0-1)", title ="Utviklingen i demokratiscore", color = "Land") + 
+  scale_color_manual(values = c("hotpink", "blue" ))
+                     
+
+p1
+
+
+
+```
+
+```{r}
+
+glimpse(vdem)
+kvantiler <- vdem |>
+  filter(year>1950)|>
+  arrange(year)|>
+  summarise(q75 = quantile(v2x_libdem, 0.75, na.rm = TRUE),
+                           q50 = quantile(v2x_libdem, 0.55, na.rm = TRUE),
+                                          q25 = quantile(v2x_libdem, 0.25, na.rm = TRUE),
+                            .by = year) |>
+  pivot_longer(-year,
+               names_prefix = "q",
+               names_to = "kvantil",
+               values_to = "score")
+
+kvantiler_plot <- kvantiler|>
+  ggplot(aes(x = year, y = score, color = kvantil )) + 
+  geom_line() 
+
+kvantiler_plot
+```
+
+```{r}
+
+
+wide <- vdem |>
+  filter(year %in% seq(1980,2020,10))|>
+  dplyr::select(year, country_name, v2x_libdem)|>
+  pivot_wider(
+              names_prefix = "demo_",
+              names_from = year,
+              values_from = v2x_libdem) 
+
+wide
+
+```
+
+```{r}
+
+library(readxl)
+library(janitor)
+
+fh <- read_excel("freedomhouse.xlsx")
+
+
+score_status <- fh |>
+  janitor::clean_names()|>
+  mutate(score = as.numeric(word(total_score_and_status,1)),status = as.factor(word(total_score_and_status,2,-1)))|>
+  mutate(country =if_else(endsWith(country,"*"),NA,country))|>
+  drop_na()
+
+```
+
+
+```{r}
+
+library(countrycode)
+
+fh_iso3 <- score_status |>
+  mutate(iso3c = countrycode(country, 
+                             "country.name",
+                             "iso3c",
+                             custom_match =c("Micronesia" = "MIC","Kosovo" = "KSV")))
+
+nrow(fh_iso3)
+
+vdem_iso3 <- vdem |>
+  filter(year == 2021)|>
+    mutate(iso3c = countrycode(country_name, 
+                             "country.name",
+                             "iso3c",
+                             custom_match = c("Kosovo" = "KSV")
+                             ))|>
+  left_join(fh_iso3, by = join_by(iso3c))|>
+  drop_na()
+
+
+colnames(vdem_iso3)
+plott <- vdem_iso3 |>
+  ggplot(aes(x = score, y = v2x_libdem)) + 
+  geom_point()
+
+plott
+
+  
+```
