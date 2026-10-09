@@ -1,0 +1,114 @@
+---
+title: "trust_and_confidence"
+format: html
+---
+
+```{r}
+
+library(tidyverse)
+library(haven)
+library(janitor)
+set_theme(theme_bw())
+gss2018 <- read_dta("gss2018.dta")|>
+  select(conlegis,trust,age,region)|>
+  janitor::clean_names()
+antall_observasjoner <- nrow(gss2018)
+antall_conlefis <- nrow(gss2018|>
+                          
+                          drop_na(conlegis))
+
+sprintf("Det var %g observasjoner", antall_observasjoner)
+
+sprintf("Det er %g som har svart på tilttsgraden til myndighetene", antall_conlefis)
+
+```
+
+```{r}
+
+t <- gss2018 |>
+  drop_na(trust)|>
+  summarise(n = n(filter(trust== 1)))
+
+t
+
+```
+
+
+```{r}
+
+
+glimpse(gss2018)
+p1 <- gss2018 |>
+  dplyr::select((conlegis))|>
+  drop_na() |>
+  ggplot(aes(x = as_factor(conlegis))) + 
+  geom_bar() + 
+  labs(x = "Tilittsgrad", y = "Antall", title = "total andel")
+
+p1
+
+```
+
+```{r}
+
+
+gss18_no <- gss2018 |>
+  mutate(noconlegis = as_factor(if_else(conlegis %in% c(3),1,0)))|>
+  select(noconlegis,age)|>
+  ggplot(aes(x = noconlegis, y = age)) +
+  geom_boxplot(aes(group = noconlegis)) +
+  scale_x_discrete(labels = c("En del tillit + noe tillit", "Lite tilitt"))
+  
+gss18_no
+
+```
+
+```{r}
+
+library(scales)
+
+tust_tibbe <- tibble(value = c(1,2,3),mean = c("Most people can be trusted", "Cant be to careful", "depends"))
+gss2018
+trust_dist <- gss2018 |>
+  left_join(tust_tibbe, by = join_by (trust == value))|>
+  select(mean)|>
+  drop_na()|>
+  ggplot() + 
+  geom_bar(aes(x = mean))
+
+(trust_dist)
+
+
+total <- nrow(gss2018|>
+                select(trust)|>
+                drop_na())
+
+total
+andel_tibble <- tibble(mean = c("Most people can be trusted", "Cant be to careful", "depends"), verdi = c(nrow(gss2018|>
+                                                                                                                 filter(trust == 1)), nrow(gss2018|>
+                                                                                                                                             filter(trust == 2)) , nrow(gss2018|>
+                                                                                                                                                                          filter(trust == 3)))) |>
+  mutate(verdi = verdi /total) |>
+  ggplot() +
+  geom_col(aes(x = mean, y = verdi)) + 
+  scale_y_continuous(labels = scales::percent)
+
+  
+
+andel_tibble
+                                                                                                    
+
+```
+
+```{r}
+total_tibble <- gss2018 |>
+  mutate(noconlegis = if_else(conlegis == 3,1,0))|>
+  mutate(notrust = if_else(trust == 2,1,0))|>
+  select(age, notrust,noconlegis)|>
+  drop_na()|>
+  ggplot() + 
+  geom_smooth(aes(x = age, y = noconlegis,color = as.factor(notrust)))
+
+(total_tibble)
+
+```

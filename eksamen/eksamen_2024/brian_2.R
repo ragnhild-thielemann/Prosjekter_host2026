@@ -20,12 +20,16 @@ for (i in 1:antall){
   View(sheet)
   kunde[i] <- sheet[4,2]
   number[i] <- sheet[5,2]
-  start[i]<- (sheet[7,2])
+  start[i]<- as.integer(sheet[7,2])
   end[i] <- (sheet[7,5])
   
   
   }
 
-a <- parse_date_time (45405)
 total <- tibble(kunde = kunde, number = number, start = start, end = end)
+
+
+total <- total |>
+  mutate(start = as_date(start,origin = "1899-12-30"))
+
 View(total)

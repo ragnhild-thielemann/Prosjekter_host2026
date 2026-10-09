@@ -1,6 +1,7 @@
 ---
 title: "dataanslyse"
 format: docx
+warning: false
 ---
 
 
@@ -36,10 +37,41 @@ Det er derfor ikke helt riktig å si at «en bit er en toerpotens». Det riktige
 
 ## Lagring av flyttall
 
-Tall lagres på formen $x = b \cdot 2^n$ der (b) er signifikanten, og (n) er eksponenten. Dette tilsvarer normalformen for desimaltall $x=b\cdot 10^n,
-\qquad 1\leq b<10.$
-For binære flyttall brukes tilsvarende $x=b\cdot 2^n,
-\qquad 1\leq b< 2.$
+Tall lagres på formen $x=b\cdot 2^n$, der $b$ er signifikanten og $n$ er eksponenten. Dette tilsvarer normalformen for desimaltall
+
+$$
+x=b\cdot 10^n, \qquad 1\leq b<10.
+$$
+
+Datamaskinen lagrer det som $m\cdot 2^n$.
+
+For binære flyttall brukes tilsvarende
+
+$$
+x=b\cdot 2^n, \qquad 1\leq b<2.
+$$
+
+Dersom vi skal lagre $2.7187$, skriver vi
+$b=27187$ og $n=-4$, siden
+
+$$
+2.7187 = 27187\cdot 10^{-4}.
+$$
+
+Dersom man vil gjøre opprasjoner på enten veldig store eller veldig små tall, må de være av samme skala.
+
+```{r}
+library(tidyverse)
+x <- 0.5 - 0.3
+y <- 0.3 - 0.1
+
+x == y 
+
+print(c(x,y),digits = 17) #der er ulikt hvordan avrundingen skjer
+
+dplyr::near(x,y) #gjør tilnærminger slik at beregningene gir mening. 
+
+```
 
 ### lagring av data
 
@@ -78,9 +110,10 @@ Datamaskiner lagrer ikke bokstaver direkte. Tegn representeres gjennom numeriske
 
 ### ASCII
 
-ASCII står for American Standard Code for Information Interchange.
+Alle bokstaver lagres ved å løse binære koder.
 
-ASCII bruker 7 bits og kan derfor representere $2^7=128$ ulike tegn.
+ASCII bruker 7 bits og kan derfor representere $2^7=128-1$ ulike tegn.
+$A = 01000001_2$ Det lagres i binære tallkoder. Da det er flere tegn og bokstaver enn dette, fikk vi problemer. 
 
 Eksempler:
 
@@ -98,15 +131,25 @@ Problemet er at ulike tegnsett bruker de samme tallkodene til forskjellige tegn.
 
 ### Unicode
 
-Et system som gir et tegn en unik kode, slik at mange skrifstystemer kan representeres. Hvert tegn får en unik kodepunktverdi, som skrives i *heksadesimal* form. Heksdsimal form er 4 bites (heksadesimal form gjør at tallene kan skrives mer kompakte), som gir en verdi mellom (1 og f). Unicode bruker punkter fra $0 \text{ til } 10FFFF_{16}$ Unicode bestemmer hvilket tall/kodepunkt hvert tegn har. UTF-8, UTF-16 og UTF-32 er ulike måter å lagre disse unicode-kodepunktene på. Dette må spesifiseres i lesing av tekstfiler.
+
+Et system som gir et tegn en unik kode, slik at mange skrifstystemer kan representeres. Alle bokstver, tegn og symboler har en representasjonen i basisen av Unicode. Hvert tegn får en unik kodepunktverdi, som skrives i *heksadesimal* form. Heksdsimal form er 4 bites (heksadesimal form gjør at tallene kan skrives mer kompakte), som gir en verdi mellom (1 og f). Unicode bruker punkter fra $0 \text{ til } 10FFFF_{16}$ 
+
+Unicode bestemmer hvilket tall/kodepunkt hvert tegn har. UTF-8, UTF-16 og UTF-32 er ulike måter å lagre disse unicode-kodepunktene på. Dette må spesifiseres i lesing av tekstfiler.
+
+$UTF-8$ er en avbildning/oversetter fra Unicode (en unik representasjon per tegn) til en binær representasjon av bokstver. For de første 255 symbolene bruker vi bar en byte. 
+  - Behandler ikke alle språk likt. Det engelske/latinske alfabetet lar seg repreenterer, mens kinesiske bokstaver er vannskligere. Kinesisk trenger 3-4 ganger mer lagringsplass. 
 ```{r}
 #| warning: false
 #| output: false
 library(tidyverse)
 
 read_delim("data.csv", delim = ";", locale = locale(encoding = "UTF-8") )
- 
- 
+
+charToRaw("å") #viser den binære koden bokstaven er representert i
+# UTF-8: c3 a5
+
+(iconv("å", from = "UTF-8", to = "Latin1"))
+# Latin1: e5
 ```
 
 

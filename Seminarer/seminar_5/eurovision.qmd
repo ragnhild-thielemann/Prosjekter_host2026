@@ -105,3 +105,13 @@ View(total_tibble)
 
 
 ```
+
+
+```{r}
+
+library(ggrepel)
+
+geom_text_repel <- gjør at de flytter rundt
+
+
+```

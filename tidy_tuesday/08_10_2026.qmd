@@ -1,0 +1,37 @@
+---
+title: "08_10_2026"
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(readr)
+life_data <- read_csv("life_data.csv")|>
+  janitor::clean_names()
+
+
+```
+
+
+```{r}
+
+library(rnaturalearth)
+library(countrycode)
+library(sf)
+behandlet <- life_data |>
+  mutate(country = countrycode(country,
+                               "country.name",
+                               "iso3c")) 
+
+kart <- rnaturalearth::ne_countries(scale = "medium", type = "countries") |>
+  select(iso_a3)|>
+  left_join(behandlet, by = join_by (iso_a3 == country))
+
+p1 <- kart |>
+  ggplot() +
+  geom_sf(aes(fill = bmi))
+
+
+p1
+```

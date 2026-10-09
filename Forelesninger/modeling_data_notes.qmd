@@ -1,0 +1,48 @@
+---
+title: "modeling_data_notes"
+format: html
+---
+
+## Models
+
+$y = f(x) + \epsilon$ Vi prøver å estimere en y ved hjelp av funksjonsverdien. Reusidalsfeilen blir da $\epsilon = y-f(x)$ (dette er en kjent fomel for reusidalene). 
+
+Vi ønsker å finne ut noe om f-funksjonen. Hensikten med modellering 
+- Summere data
+- Predikere fremtiden 
+- Finne kausale relasjoner mellom x-er og y-er. (korrelasjon og kausalitet)
+
+
+## Viktige tradeofs vi gjør når vi driver maskinlæring
+
+|Fleksibel model|Begrenset struktur|
+|-|-|
+|God til å tilpasse deg dataen| Tilpasser seg lite etter dataen|
+|Vansklig å estimere | Enkel å estimere|
+|Når vi tester den på annnen data enn treningsettet, vil den passe dårlig|Passer bedre til annen data |
+|Vannslig å tolke| Lett å tolke (finne parametere)|
+|Høy varians|Høy bias|
+
+Vi kan dele variansen mellom $varians$ + $bias$
+
+
+$geom$_$smooth(method = lm, se = F)$, gir en linjær regresjonsmodell basert på dataen, uten et kofidensintervall. 
+
+### Linjære modeller
+
+- Er linjære i paramterene, men ikke nødvendigvis i $x_i,...x_m$ er linjære
+  - Dummies (husk å gjøre til as_factor)
+  - Intrasjoner
+  - Polynomer
+  
+- kontrollere for fixed effeks
+$feols(lifeexp$ ~$log(GDP)|Coundry , data )$. Finner da en linjærmodell innad i hvert enkelt land. 
+
+kan lagre modellene som tibbels <- dermed plukke ut estimatene. 
+  
+## Overfitting
+
+Mange forklaringsvariabler
+- Med mye data, kan vi få mange forklaringsvariberl. 
+    $x_i$ er en lang vektor, K er et stort tall. 
+    

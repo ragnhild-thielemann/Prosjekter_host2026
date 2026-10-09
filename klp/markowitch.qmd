@@ -1,0 +1,82 @@
+---
+title: "markowitch"
+format: html
+---
+Vi finner først kovariansmatrisen C
+```{r}
+sigma_1 <- 0.05
+sigma_2 <- 0.15
+sigma_3 <- 0.10
+
+kor_12 <- 0.1
+kor_13 <- -0.2
+kor_23 <- -0.1
+
+aksje_risk <- c(sigma_1, sigma_2, sigma_3)
+aksje_avkas <- c(0.1, 0.2, 0.2)
+
+one <- rep(1, 3)
+
+soyle_1 <- c(
+  sigma_1^2,
+  sigma_1*sigma_2*kor_12,
+  sigma_1*sigma_3*kor_13
+)
+
+soyle_2 <- c(
+  sigma_1*sigma_2*kor_12,
+  sigma_2^2,
+  sigma_2*sigma_3*kor_23
+)
+
+soyle_3 <- c(
+  sigma_1*sigma_3*kor_13,
+  sigma_2*sigma_3*kor_23,
+  sigma_3^2
+)
+
+C <- cbind(soyle_1, soyle_2, soyle_3)
+
+C_inv <- solve(C)
+
+r <- aksje_avkas
+
+a <- as.numeric(t(one) %*% C_inv %*% r)
+b <- as.numeric(t(r) %*% C_inv %*% r)
+c_konst <- as.numeric(t(one) %*% C_inv %*% one)
+
+```
+
+
+```{r}
+tabell <- tibble(
+  avkastning = avkasnting_vektor,
+  risiko = risiko_vektor
+)
+R_GMV <- a / c_konst
+
+tabell_effektiv <- tabell |>
+  filter(avkastning >= R_GMV)
+
+
+aksjer <- tibble(
+  risiko = aksje_risk,
+  avkastning = aksje_avkas
+)
+
+p1 <- tabell_effektiv |>
+  ggplot() + 
+  geom_line(aes(x = risiko, y = avkastning)) + 
+  geom_point(
+    data = data.frame(
+      risiko = aksje_risk,
+      avkastning = aksje_avkas
+    ),
+    aes(x = risiko, y = avkastning),
+    size = 3
+  )
+
+p1
+p1
+```
+
